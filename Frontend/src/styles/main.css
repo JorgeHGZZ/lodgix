@@ -1,0 +1,16 @@
+:root{
+    --primary-color: #716c50;
+    --secondary-color: #773e24;
+    --color-mantenimiento: #facc15;
+    --bg-color: #fffaea;
+    --color-limpieza: #b8d0cc;
+    --text-color: #333;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
