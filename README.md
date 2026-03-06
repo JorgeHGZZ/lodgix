@@ -1,73 +1,356 @@
-# React + TypeScript + Vite
+# Lodgix – Sistema de Gestión Hotelera
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+**Lodgix** es una aplicación web para la gestión de hoteles que permite administrar clientes, habitaciones, reservas y pagos desde una única plataforma.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+El sistema está desarrollado utilizando el stack **MERN (MongoDB, Express, React, Node.js)**, implementando una arquitectura desacoplada basada en **API REST**, autenticación mediante **JWT**, y un modelo de datos gestionado con **Mongoose**.
 
-## React Compiler
+El objetivo del sistema es centralizar las operaciones principales de un hotel, facilitando la administración de recursos y la gestión de reservas de manera eficiente.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+#  Tecnologías Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Frontend
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* React
+* Vite
+* React Router
+* Axios
+* Tailwind CSS
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Backend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose (ODM)
+* JSON Web Tokens (JWT)
+* Winston (Logging)
+
+---
+
+#  Arquitectura del Sistema
+
+La aplicación sigue una arquitectura desacoplada basada en API REST.
+
+```
+Frontend (React)
+        │
+        ▼
+API REST (Node.js + Express)
+        │
+        ▼
+ODM (Mongoose)
+        │
+        ▼
+Base de Datos (MongoDB)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Principios aplicados:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* Separación de responsabilidades
+* Acceso a datos centralizado
+* Validación en backend
+* Seguridad mediante autenticación por token
+* Comunicación mediante API REST
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+#  Modelo de Datos
+
+El sistema utiliza MongoDB como base de datos NoSQL, estructurada mediante **schemas de Mongoose**.
+
+## Colecciones principales
+
+### Users
+
+Usuarios del sistema.
+
+Campos principales:
+
+* nombre
+* email
+* password
+* rol
+* createdAt
+
+---
+
+### Clients
+
+Clientes del hotel.
+
+Campos principales:
+
+* nombre
+* apellido
+* telefono
+* email
+
+---
+
+### Rooms
+
+Habitaciones del hotel.
+
+Campos principales:
+
+* numero
+* tipo
+* precioNoche
+* estado
+
+---
+
+### Reservations
+
+Reservas realizadas por clientes.
+
+Campos principales:
+
+* clienteId
+* usuarioId
+* fechaInicio
+* fechaFin
+* habitaciones
+* total
+* estado
+
+---
+
+### Payments
+
+Pagos asociados a reservas.
+
+Campos principales:
+
+* reservationId
+* monto
+* metodo
+* fecha
+* estado
+
+---
+
+#  API REST
+
+La comunicación entre frontend y backend se realiza mediante endpoints REST.
+
+## Endpoints principales
+
+### Autenticación
+
 ```
+POST /api/auth/login
+POST /api/auth/register
+```
+
+---
+
+### Clientes
+
+```
+GET /api/clients
+POST /api/clients
+PUT /api/clients/:id
+DELETE /api/clients/:id
+```
+
+---
+
+### Habitaciones
+
+```
+GET /api/rooms
+POST /api/rooms
+PUT /api/rooms/:id
+DELETE /api/rooms/:id
+```
+
+---
+
+### Reservas
+
+```
+GET /api/reservations
+POST /api/reservations
+PUT /api/reservations/:id
+DELETE /api/reservations/:id
+```
+
+---
+
+### Pagos
+
+```
+GET /api/payments
+POST /api/payments
+PUT /api/payments/:id
+DELETE /api/payments/:id
+```
+
+---
+
+#  Seguridad
+
+El sistema implementa autenticación basada en **JWT (JSON Web Tokens)**.
+
+Flujo de autenticación:
+
+1. El usuario inicia sesión.
+2. El backend genera un token JWT.
+3. El frontend almacena el token.
+4. Cada petición protegida incluye el token en el header:
+
+```
+Authorization: Bearer TOKEN
+```
+
+Los endpoints protegidos requieren un token válido para ser accedidos.
+
+---
+
+#  Lógica de Negocio
+
+La lógica de negocio del sistema se encuentra en la capa **Services**, separada de los controladores y del acceso a datos.
+
+Ejemplos de reglas implementadas:
+
+* No permitir reservas en habitaciones ocupadas.
+* Validar fechas de entrada y salida.
+* Calcular el total de la reserva en base al número de noches.
+* Registrar pagos asociados a reservas existentes.
+
+---
+
+#  Sistema de Logging
+
+Se utiliza **Winston** para registrar eventos importantes del sistema, tales como:
+
+* errores del servidor
+* excepciones
+* autenticaciones
+* creación de reservas
+* registro de pagos
+
+Los logs se almacenan en archivos dentro del directorio:
+
+```
+/logs
+```
+
+---
+
+#  Estructura del Proyecto
+
+```
+project-root
+│
+├── backend
+│   ├── controllers
+│   ├── services
+│   ├── models
+│   ├── routes
+│   ├── middleware
+│   ├── config
+│   └── server.js
+│
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── services
+│   │   └── App.jsx
+│   │
+│   └── index.html
+│
+└── README.md
+```
+
+---
+
+#  Instalación del Proyecto
+
+## 1 Clonar repositorio
+
+```
+git clone https://github.com/usuario/stayflow.git
+```
+
+---
+
+## 2 Instalar dependencias backend
+
+```
+cd backend
+npm install
+```
+
+---
+
+## 3 Instalar dependencias frontend
+
+```
+cd frontend
+npm install
+```
+
+---
+
+## 4 Variables de entorno
+
+Crear archivo `.env` en el backend:
+
+```
+PORT=3000
+MONGO_URI=mongodb://localhost:27017/hotel-system
+JWT_SECRET=secret_key
+```
+
+---
+
+## 5 Ejecutar proyecto
+
+Backend:
+
+```
+npm run dev
+```
+
+Frontend:
+
+```
+npm run dev
+```
+
+---
+
+#  Interfaz de Usuario
+
+El frontend está desarrollado en React y utiliza un sistema de componentes reutilizables para mantener una interfaz consistente.
+
+Características de la UI:
+
+* diseño responsivo
+* navegación mediante React Router
+* dashboard de gestión
+* formularios de administración
+* manejo de estados y peticiones API
+
+---
+
+#  Futuras Mejoras
+
+* Panel de reportes
+* Integración con pasarelas de pago
+* Gestión de disponibilidad en tiempo real
+* Notificaciones automáticas
+* Sistema de roles avanzado
+
+---
+
+#  Autor
+  Jorge Humberto Gonzalez Morin
+  Estefania
