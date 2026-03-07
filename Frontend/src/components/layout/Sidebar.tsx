@@ -1,0 +1,17 @@
+import SidebarMenu from "./SidebarMenu";
+import SidebarUser from "../ui/SidebarUser";
+import styles from "../../styles/Sidebar.module.css";
+
+const Sidebar = () => {
+    return (
+        <aside className={styles.sidebar}>
+            <h1>Lodgix</h1>
+            <hr className={styles.line} />
+            <SidebarMenu />
+            <hr className={styles.line} />
+            <SidebarUser usuario="John Doe" />
+        </aside>
+    );
+};
+
+export default Sidebar;

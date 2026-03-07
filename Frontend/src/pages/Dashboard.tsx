@@ -1,7 +1,9 @@
+import Sidebar from "../components/layout/Sidebar";
+
 function dashboard() {
     return (
         <div>
-            <h1>Dashboard</h1>
+            <Sidebar />
         </div>
     )
 }
