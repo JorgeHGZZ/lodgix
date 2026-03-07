@@ -2,7 +2,12 @@ import SidebarMenu from "./SidebarMenu";
 import SidebarUser from "../ui/SidebarUser";
 import styles from "../../styles/Sidebar.module.css";
 
-const Sidebar = () => {
+interface SidebarProps {
+    className?: string;
+}
+
+
+function Sidebar() {
     return (
         <aside className={styles.sidebar}>
             <h1>Lodgix</h1>
