@@ -1,6 +1,7 @@
 import { useState } from "react";
 import UserDropdown from "./UserDropdown";
 import Avatar from "./Avatar";
+import styles from "../../styles/SidebarUser.module.css";
 
 interface UserProps {
     usuario: string;
@@ -12,11 +13,10 @@ const SidebarUser = ({usuario}: UserProps) => {
 
     return (
         <div className="sidebarUser">
-            <div className="userInfo" onClick={() => setOpen(!open)}>
-                <Avatar src="/images/user.jpg" alt="Usuario" />
+            <div className={styles.userInfo} onClick={() => setOpen(!open)}>
+                <Avatar src="https://i.pravatar.cc/150" alt="Usuario" />
                 <span>{usuario}</span>
             </div>
-
             {open && <UserDropdown />}
         </div>
     );

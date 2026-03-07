@@ -1,0 +1,33 @@
+@import url("./main.css");
+
+
+.StatusBar {
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.status{
+    padding: 10px;
+    color: white;
+}
+
+.ocupada{
+    background-color: var(--secondary-color);
+}
+
+.disponible{
+    background-color: var(--primary-color);
+}
+
+.mantenimiento{
+    background-color: var(--mantenimiento-color);
+}
+
+.limpieza{
+    background-color: var(--limpieza-color);
+}

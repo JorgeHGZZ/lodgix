@@ -1,10 +1,7 @@
+
 import SidebarMenu from "./SidebarMenu";
 import SidebarUser from "../ui/SidebarUser";
 import styles from "../../styles/Sidebar.module.css";
-
-interface SidebarProps {
-    className?: string;
-}
 
 
 function Sidebar() {

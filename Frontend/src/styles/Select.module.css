@@ -1,0 +1,26 @@
+@import url("./main.css");
+
+
+.Select {
+    padding: 10px 35px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+    width: 50%;
+    margin-left: 5%
+}
+
+.Select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.option{
+    padding: 20px;
+}
+
+.option:hover {
+    background-color: var(--primary-color);
+    color: white;
+}

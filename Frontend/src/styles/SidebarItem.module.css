@@ -1,0 +1,14 @@
+@import url("./main.css");
+
+.sidebarItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 25px;
+}

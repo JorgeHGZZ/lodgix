@@ -2,7 +2,7 @@
 
 .DashboardContainer {
     display: grid;
-    grid-template-columns: 18% 1fr 1fr;
+    grid-template-columns: 15% 1fr 1fr;
     grid-template-rows: 10% 1fr 1fr;
     gap: 0px 0px;
     width: 100vw;
@@ -26,6 +26,7 @@
     grid-column: 2 / 4;
     grid-row: 2 / 4;
     width: 100%;
-    background-color: black;
+    padding: 25px;
+
 }
 
