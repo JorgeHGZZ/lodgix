@@ -8,7 +8,7 @@ import Button from "../../components/ui/Button";
     const navigate = useNavigate();
 
   return (
-    <>
+   
     <div className="hotel-page">
 
       <h1 className="hotel-title">Hotel Sol y Mar</h1>
@@ -109,7 +109,7 @@ import Button from "../../components/ui/Button";
       </div>
 
     </div>
-    </>
+    
   );
 }
 export default DetailRoom;
