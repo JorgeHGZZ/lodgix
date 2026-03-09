@@ -1,4 +1,5 @@
 import style from '../styles/SignUp.module.css';
+import { NavLink } from 'react-router-dom';
 
 function SignUp() {
     return (
@@ -31,7 +32,7 @@ function SignUp() {
                     <span>Confirm password</span>
             </label>
             <button className={style.submit}>Submit</button>
-            <p className={style.signin}>Already have an acount ? <a href="#">Signin</a> </p>
+            <p className={style.signin}>Already have an acount ? <NavLink to="/login">Sign in</NavLink> </p>
         </form>
     )
 }

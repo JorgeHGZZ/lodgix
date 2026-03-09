@@ -1,12 +1,13 @@
 import styles from "../../styles/SidebarMenu.module.css";
 import SidebarItem from "../ui/SidebarItem";
 import { MdBedroomChild } from "react-icons/md";
-import { FaBed, FaUsers, FaTools, FaBroom, FaFileAlt } from "react-icons/fa";
+import { FaBed, FaUsers, FaTools, FaBroom, FaFileAlt, FaHome } from "react-icons/fa";
 
 
 
 const SidebarMenu = () => {
     const menuItems = [
+        { icon: <FaHome />, label: "Inicio", path: "/dashboard" },
         { icon: <MdBedroomChild />, label: "Habitaciones", path: "/dashboard/rooms" },
         { icon: <FaBed />, label: "Reservaciones", path: "/dashboard/reservaciones" },
         { icon: <FaUsers />, label: "Clientes", path: "/dashboard/clientes" },

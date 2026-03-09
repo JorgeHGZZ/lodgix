@@ -11,6 +11,11 @@ import Clients from "../pages/dashboard/Clients";
 import Maintenance from "../pages/dashboard/Maintenance";
 import Cleaning from "../pages/dashboard/CleanService";
 import Reports from "../pages/dashboard/Reports";
+import Home from "../pages/dashboard/Home";
+
+//Rutas del lado del cliente
+import PLanding from "../pages/public/PLanding";
+import Landing2 from "../pages/public/PLanding2";
 import DetailRoom from "../pages/dashboard/DetailRoom";
 import Payment from "../pages/dashboard/Payment";
 
@@ -18,13 +23,16 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Landing />} />
+                <Route path="/" element={<Landing2 />} />
+
+
+                <Route path="/landing" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<SignUp />} />
                
 
                 <Route path="/dashboard" element={<Dashboard />}>
-                    <Route index element={<Rooms />} />
+                    <Route index element={<Home />} />
                     <Route path="rooms" element={<Rooms />} />
                     <Route path="reservaciones" element={<Reservations />} />
                     <Route path="clientes" element={<Clients />} />

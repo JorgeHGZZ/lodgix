@@ -1,0 +1,84 @@
+@import url("./main.css");
+
+.RoomCard {
+    width: 15%;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.RoomCard:hover {
+    transform: translateY(-3px);
+}
+
+/* HEADER */
+
+.CardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.CardHeader button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 6px;
+    color: white;
+    cursor: pointer;
+}
+
+/* BODY */
+
+.CardBody {
+    text-align: center;
+    font-size: 14px;
+}
+
+.CardBody p:first-child {
+    font-weight: 600;
+}
+
+/* FOOTER */
+
+.CardFooter {
+    display: flex;
+    justify-content: center;
+}
+
+.statusButton {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: white;
+}
+
+.CardSeparator {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 5px 0;
+}
+.Ocupada {
+    background-color: var(--secondary-color);
+}
+
+.Disponible {
+    background-color: var(--primary-color);
+}
+
+.Mantenimiento {
+    background-color: var(--mantenimiento-color);
+}
+
+.Limpieza {
+    background-color: var(--limpieza-color);
+}
