@@ -24,7 +24,7 @@ function Reservations() {
         </div>
 
         <div className="filter">
-           Huéspedes
+           Huéspedes  
           <select>
             <option>2</option>
             <option>3</option>
