@@ -1,8 +1,12 @@
 import "../../styles/details-room.css";
+import { useNavigate } from "react-router-dom";
 import roomImage from "../../assets/images/hab1.jpg";
 import roomImage1 from "../../assets/images/hab2.jpg";
+import Button from "../../components/ui/Button";
 
  function DetailRoom() {
+    const navigate = useNavigate();
+
   return (
     <>
     <div className="hotel-page">
@@ -70,9 +74,8 @@ import roomImage1 from "../../assets/images/hab2.jpg";
             <h3>Detalles de la habitación</h3>
             <p>Servicios extras</p>
 
-            <button className="reserve-btn">
-              Reservar
-            </button>
+            <Button onClick={() => navigate('/dashboard/payment')} classname="reserve-btn"  titulo="Reservar">
+            </Button>
 
           </div>
 
