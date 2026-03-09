@@ -1,6 +1,7 @@
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
+
 function Searchbar() {
     return(
         <div className="searchbar">
