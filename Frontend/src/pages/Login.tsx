@@ -1,10 +1,10 @@
-import { useState, FormEvent } from "react";
-import authService from "../services/authService";
+/*import { useState, FormEvent } from "react";
+import authService from "../services/authService";*/
 import style from "../styles/Login.module.css"
 import { NavLink } from "react-router-dom";
 
 function Login() {
-    const [email, setEmail] = useState<string>("");
+    /*const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
 
@@ -38,7 +38,7 @@ function Login() {
             setError("Error al iniciar sesión");
         }
 
-    };
+    };*/
 
     return (
         <div className={style.loginContainer}>

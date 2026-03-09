@@ -231,3 +231,18 @@ a{
 .subscribe {
     margin-top: 20px;
 }
+
+.subscribe input{
+    background-color: aliceblue;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+.subscribe button{
+    border:none;
+    background-color: var(--bg-color);
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-left: 10px;
+}
