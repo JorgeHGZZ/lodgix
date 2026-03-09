@@ -1,8 +1,9 @@
 import "../../styles/details-room.css";
 import roomImage from "../../assets/images/hab1.jpg";
 
-export default function Detailsroom() {
+ function DetailRoom() {
   return (
+    <>
     <div className="hotel-page">
 
       <h1 className="hotel-title">Sol y Mar</h1>
@@ -103,5 +104,7 @@ export default function Detailsroom() {
       </div>
 
     </div>
+    </>
   );
 }
+export default DetailRoom;
