@@ -15,7 +15,7 @@ function Maintenance(){
 
         <div className="filters">
           <input type="text" placeholder="Buscar habitación..." />
-           <button className="btn-add">Buscar</button>
+          
           <select>
             <option>Prioridad</option>
             <option>Alta</option>
@@ -30,6 +30,7 @@ function Maintenance(){
             <option>Completado</option>
           </select>
 
+          <button className="btn-add">Buscar</button>
           <button className="btn-add">+ Reportar problema</button>
          
         </div>
