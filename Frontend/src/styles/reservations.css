@@ -1,1 +1,92 @@
 @import url("./main.css");
+.filters{
+ margin-top:20px;
+  display:flex;
+  gap:20px;
+  justify-content:left;
+}
+
+.filter{
+  background:#9b7a2e;
+  padding:10px;
+  border-radius:8px;
+}
+
+.bed-filter{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+}
+
+.search-bar{
+  display:flex;
+  gap:20px;
+}
+
+.search-item{
+  background:#eee;
+  padding:10px;
+  border-radius:8px;
+  display:flex;
+  gap:5px;
+  align-items:center;
+}
+
+.search-btn{
+  margin-top:10px;
+  background:#9b7a2e;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:10px;
+}
+
+.offers-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:40px;
+  border-top:2px solid #8a8568;
+  padding-top:20px;
+}
+
+.offers-container{
+  margin-top:10px;
+  background:#7f7758;
+  padding:20px;
+  border-radius:30px;
+  display:flex;
+  gap:30px;
+  align-items:center;
+  justify-content:center;
+}
+
+.hotel-card{
+  background:#f4efe4;
+  padding:15px;
+  border-radius:20px;
+  width:180px;
+  text-align:center;
+}
+
+.hotel-card img{
+  width:100%;
+  border-radius:12px;
+}
+
+.details-btn{
+  margin-top:10px;
+  background:#9b7a2e;
+  color:white;
+  border:none;
+  padding:8px 16px;
+  border-radius:10px;
+}
+
+.more-offers button{
+  background:#f4efe4;
+  border:none;
+  padding:12px 20px;
+  border-radius:20px;
+}
