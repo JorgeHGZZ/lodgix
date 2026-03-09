@@ -11,6 +11,10 @@
  justify-content:left;
 
 }
+.h1{
+color: #716c50;
+}
+
 .cleaning-container{
   padding:30px;
   background:var(--bg-color);
