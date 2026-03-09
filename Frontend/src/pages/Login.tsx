@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import authService from "../services/authService";
 import style from "../styles/Login.module.css"
+import { NavLink } from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState<string>("");
@@ -55,7 +56,7 @@ function Login() {
                             <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
                         </div>
                     </div>
-                    <button className={style.sign}>Sign in</button>
+                    <NavLink to="/dashboard" className={style.sign}>Sign in</NavLink>
                 </form>
                 <div className={style.socialMessage}>
                     <div className={style.line}></div>
@@ -76,7 +77,7 @@ function Login() {
                     </button>
                 </div>
                 <p className={style.signup}>Don't have an account?
-                    <a rel="noopener noreferrer" href="#" className={style.link}>Sign up</a>
+                    <NavLink to="/register" className={style.link}>Sign up</NavLink>
                 </p>
             </div>
         </div>
