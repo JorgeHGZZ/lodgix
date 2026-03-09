@@ -13,15 +13,20 @@ interface RoomCardProps {
 function RoomCard({ id, status, category, guestName }: RoomCardProps) {
     return (
         <div className={`${styles.RoomCard} ${styles[status]}`}>
-            <div className={styles.header}>
+            <div className={styles.CardHeader}>
                 <p>Habitacion {id}</p>
                 <button><FaPlus /></button>
             </div>
-            <div className={styles.body}>
+            <hr className={styles.CardSeparator} />
+            <div className={styles.CardBody}>
                 <p>{guestName}</p>
                 <p>Categoria: {category}</p>
             </div>
-            <button className={styles.statusButton}>{status}</button>
+            <hr className={styles.CardSeparator} />
+            <div className={styles.CardFooter}>
+                <button className={styles.statusButton}>{status}</button>
+            </div>
+
         </div>
     )
 }

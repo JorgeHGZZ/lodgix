@@ -6,13 +6,19 @@ const rooms = [
     { id: 102, status: "Ocupada", category: "Suite", guestName: "María García López" },
     { id: 103, status: "Mantenimiento", category: "Doble" },
     { id: 104, status: "Limpieza", category: "Sencilla" },
+    { id: 105, status: "Disponible", category: "Suite" },
+    { id: 106, status: "Ocupada", category: "Doble", guestName: "Carlos Martínez Pérez" },
+    { id: 107, status: "Disponible", category: "Sencilla" },
+    { id: 108, status: "Mantenimiento", category: "Suite" },
+    { id: 109, status: "Limpieza", category: "Doble" },
+    { id: 110, status: "Disponible", category: "Sencilla" },
 ];
 
 
 function Rooms() {
     return (
         <div>
-            <h1>Gestión de Habitaciones</h1>
+            <h1 className={styles.title}>Gestión de Habitaciones</h1>
             <div className={styles.RoomsContainer} >
                 {
                     rooms.map((room) => (
