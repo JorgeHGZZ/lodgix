@@ -7,8 +7,6 @@
     --text-color: #333;
 }
 
-/* CONTENEDOR */
-
 .payment-container{
     display:flex;
     justify-content:space-between;
@@ -16,8 +14,6 @@
     background:var(--bg-color);
     min-height:100vh;
 }
-
-/* FORMULARIO */
 
 .payment-form{
     width:40%;
@@ -34,7 +30,6 @@
     margin-bottom:20px;
 }
 
-/* METODOS DE PAGO */
 
 .payment-method{
     display:flex;
@@ -76,14 +71,10 @@
     background:#fafafa;
 }
 
-/* FILA TARJETA */
-
 .card-row{
     display:flex;
     gap:10px;
 }
-
-/* BOTON */
 
 .reserve-btn{
     margin-top:25px;
@@ -102,16 +93,12 @@
     box-shadow:0 6px 12px rgba(0,0,0,0.2);
 }
 
-/* PAGO EN EFECTIVO */
-
 .cash-info{
     background:var(--bg-color);
     padding:15px;
     border-radius:8px;
     margin-top:10px;
 }
-
-/* RESUMEN */
 
 .payment-summary{
     width:45%;
