@@ -62,7 +62,8 @@
 .offers-container{
   margin-top:10px;
   background:#7f7758;
-  padding:20px;
+  width: 95%;
+  padding:30px;
   border-radius:30px;
   display:flex;
   gap:30px;
