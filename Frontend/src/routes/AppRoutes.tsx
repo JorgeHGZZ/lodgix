@@ -12,6 +12,7 @@ import Maintenance from "../pages/dashboard/Maintenance";
 import Cleaning from "../pages/dashboard/CleanService";
 import Reports from "../pages/dashboard/Reports";
 import DetailRoom from "../pages/dashboard/DetailRoom";
+import Payment from "../pages/dashboard/Payment";
 
 const AppRouter = () => {
     return (
@@ -31,6 +32,7 @@ const AppRouter = () => {
                     <Route path="limpieza" element={<Cleaning />} />
                     <Route path="reportes" element={<Reports />} />
                     <Route path="detailroom" element={<DetailRoom  />} />
+                     <Route path="payment" element={<Payment  />} />
                 </Route>
             </Routes>
         </BrowserRouter>
