@@ -9,7 +9,7 @@ function Reservations() {
     return (
         <>
         <div>
-            <h1>Reservaciones</h1>
+            <h1 className="h1">Reservaciones</h1>
             {/* <p>Si ves esto, el Outlet está funcionando.</p> */}
         </div> 
       <div className="filters">
