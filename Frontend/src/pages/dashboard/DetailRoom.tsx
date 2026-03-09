@@ -1,21 +1,22 @@
 import "../../styles/details-room.css";
 import roomImage from "../../assets/images/hab1.jpg";
+import roomImage1 from "../../assets/images/hab2.jpg";
 
  function DetailRoom() {
   return (
     <>
     <div className="hotel-page">
 
-      <h1 className="hotel-title">Sol y Mar</h1>
+      <h1 className="hotel-title">Hotel Sol y Mar</h1>
 
       <div className="hotel-gallery">
 
-        <button className="gallery-btn left">◀</button>
+        <button className="gallery-btn left"></button>
 
         <img
-          src={roomImage} alt="Hotel" className="hotel-image"/>
+          src={roomImage1} alt="Hotel" className="hotel-image"/>
 
-        <button className="gallery-btn right">▶</button>
+        <button className="gallery-btn right"></button>
 
       </div>
 
@@ -55,11 +56,11 @@ import roomImage from "../../assets/images/hab1.jpg";
 
           <div className="room-image">
 
-            <button className="gallery-btn left">◀</button>
+            <button className="gallery-btn left"></button>
 
             <img src={roomImage} alt="Habitacion"/>
 
-            <button className="gallery-btn right">▶</button>
+            <button className="gallery-btn right"></button>
 
           </div>
 
@@ -80,11 +81,11 @@ import roomImage from "../../assets/images/hab1.jpg";
 
           <div className="room-image">
 
-            <button className="gallery-btn left">◀</button>
+            <button className="gallery-btn left"></button>
            
             <img src={roomImage} alt="Habitacion"/>
 
-            <button className="gallery-btn right">▶</button>
+            <button className="gallery-btn right"></button>
 
           </div>
 
