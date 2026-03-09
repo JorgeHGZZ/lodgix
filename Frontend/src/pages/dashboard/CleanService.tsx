@@ -4,7 +4,7 @@ function CleanService(){
     return (
         <>
         <div>
-            <h1>Servicio de limpieza</h1>
+            <h1 className="h1">Servicio de limpieza</h1>
             {/* <p>Si ves esto, el Outlet está funcionando.</p> */}
         </div>
 
