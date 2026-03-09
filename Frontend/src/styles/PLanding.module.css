@@ -1,0 +1,233 @@
+@import url("./main.css");
+
+.container {
+    font-family: sans-serif;
+    background: #f6f6f6;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+    color: white;
+
+    z-index: 1000;
+    /* efecto glass moderno */
+    background-color: #4f614b;
+
+}
+
+.navLinks {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    color: var(--bg-color);
+}
+
+.auth button {
+    margin-left: 10px;
+    
+}
+.signup{
+    background-color: #4f614b;
+    border: none;
+    color: var(--bg-color);
+    font-size: 15px;
+    text-decoration: none;
+}
+.login{
+    border: 1px var(--bg-color) solid;
+    border-radius: 16px;
+    background-color: #4f614b;
+    padding: 10px 20px;
+    color: var(--bg-color);
+    font-size: 15px;
+    margin-left: 15px;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+    color: var(--bg-color);
+}
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px;
+    padding-bottom: 200px;
+    height: 10%;
+    color: white;
+    background-image: url("../assets/images/hotel.jpg");
+    background-size: cover;
+    background-position: 10px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(to bottom,
+            rgba(255, 0, 0, 0) 60%,
+            var(--bg-color)), linear-gradient(to right, rgba(0, 0, 0, .5), transparent 80%);
+
+    z-index: 1;
+}
+
+.heroText {
+    margin-left: 50px;
+}
+
+.heroText h1 {
+    font-size: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.searchBar {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+
+
+.hotels {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionHeader {
+    color: var(--primary-color);
+}
+
+.sectionHeader h2 {
+    font-size: 70px;
+}
+
+.sectionHeader p {
+    font-size: 25px;
+}
+
+
+
+.hotelGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    width: 90%;
+}
+
+.hotelCard {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.hotelCard img {
+    width: 100%;
+    height: 250px;
+    /* altura fija */
+    object-fit: cover;
+    /* recorta sin deformar */
+    border-radius: 10px;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.memories {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 80px 80px 80px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.memories h2 {
+    font-size: 60px;
+}
+
+.memoryImages {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.memoryImages img {
+    width: 30%;
+    border-radius: 100px;
+}
+
+.memories button {
+    border: 1px var(--primary-color) solid;
+    border-radius: 16px;
+    padding: 20px 50px;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.memories button:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.stats {
+    background: #4f614b;
+    color: white;
+    padding: 80px;
+    padding-left: 250px;
+    text-align: center;
+    display: flex;
+}
+
+.statsGrid {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 30px;
+    margin-right: 150px;
+    margin-left: 150px;
+}
+
+.statsGrid h3 {
+    font-size: 30px;
+}
+
+.news {
+    padding: 80px;
+}
+
+.newsGrid {
+    display: flex;
+    gap: 40px;
+}
+
+.bigNews img {
+    width: 400px;
+}
+
+
+.footer {
+    background: #2f3a2c;
+    color: white;
+    padding: 60px;
+    text-align: center;
+}
+
+.subscribe {
+    margin-top: 20px;
+}
