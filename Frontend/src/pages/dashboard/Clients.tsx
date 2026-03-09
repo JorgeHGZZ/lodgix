@@ -1,7 +1,7 @@
 function Clients() {
     return (
         <div>
-            <h1>Clients del Dashboard</h1>
+            <h1 className="h1">Clients del Dashboard</h1>
             <p>Si ves esto, el Outlet está funcionando.</p>
         </div>
     );
