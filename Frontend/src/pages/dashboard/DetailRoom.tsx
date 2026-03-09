@@ -15,6 +15,7 @@ import roomImage1 from "../../assets/images/hab2.jpg";
 
         <img
           src={roomImage1} alt="Hotel" className="hotel-image"/>
+          
 
         <button className="gallery-btn right"></button>
 
