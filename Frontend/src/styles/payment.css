@@ -1,0 +1,149 @@
+:root{
+    --primary-color: #716c50;
+    --secondary-color: #773e24;
+    --mantenimiento-color: #facc15;
+    --bg-color: #fffaea;
+    --limpieza-color: #b8d0cc;
+    --text-color: #333;
+}
+
+/* CONTENEDOR */
+
+.payment-container{
+    display:flex;
+    justify-content:space-between;
+    padding:50px;
+    background:var(--bg-color);
+    min-height:100vh;
+}
+
+/* FORMULARIO */
+
+.payment-form{
+    width:40%;
+    background:white;
+    padding:35px;
+    border-radius:14px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    display:flex;
+    flex-direction:column;
+}
+
+.payment-title{
+    color:var(--primary-color);
+    margin-bottom:20px;
+}
+
+/* METODOS DE PAGO */
+
+.payment-method{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.method{
+    flex:1;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid var(--primary-color);
+    background:white;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.method:hover{
+    background:var(--bg-color);
+}
+
+.method.active{
+    background:var(--primary-color);
+    color:white;
+}
+
+/* INPUTS */
+
+.payment-form label{
+    margin-top:10px;
+    font-size:14px;
+}
+
+.payment-form input{
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    margin-top:5px;
+    background:#fafafa;
+}
+
+/* FILA TARJETA */
+
+.card-row{
+    display:flex;
+    gap:10px;
+}
+
+/* BOTON */
+
+.reserve-btn{
+    margin-top:25px;
+    padding:12px;
+    border:none;
+    border-radius:20px;
+    background:var(--secondary-color);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reserve-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* PAGO EN EFECTIVO */
+
+.cash-info{
+    background:var(--bg-color);
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+/* RESUMEN */
+
+.payment-summary{
+    width:45%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hotel-card{
+    background:var(--primary-color);
+    color:white;
+    padding:30px;
+    border-radius:30px;
+    width:350px;
+    text-align:center;
+}
+
+.hotel-card img{
+    width:200px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.hotel-details{
+    margin-top:10px;
+}
+
+.hotel-details p{
+    margin:6px 0;
+}
+
+.price{
+    font-size:18px;
+    font-weight:bold;
+}
