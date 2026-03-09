@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import "../../styles/reservations.css";
 import roomImage from "../../assets/images/hab1.jpg";
+import Button from "../../components/ui/Button";
+
 
 function Reservations() {
+  const navigate = useNavigate();
     return (
         <>
         <div>
@@ -31,13 +35,13 @@ function Reservations() {
             <option>4</option>
           </select>
         </div>
-
-      </div>
-
-      <button className="search-btn">
+ <button className="search-btn">
         Buscar
       </button>
 
+      </div>
+
+     
       <div className="offers-title">
 
         <h2>Grandes ahorros en tus viajes</h2>
@@ -49,8 +53,9 @@ function Reservations() {
 
           <img src={roomImage} alt="Hotel"/>
 
-          <p>Informacion del hotel</p>
-          <p>precio por noche</p>
+           <p>Hotel Sol y mar</p>
+          <p>Precio por noche: $789</p>
+          <p>Ubicacion: Guatemala, calle no.234</p>
 
           <button className="details-btn">
             Detalles
@@ -62,12 +67,12 @@ function Reservations() {
 
           <img src={roomImage} alt="Hotel"/>
 
-          <p>Informacion del hotel</p>
-          <p>precio por noche</p>
+         <p>Hotel Sol y mar</p>
+          <p>Precio por noche: $789</p>
+          <p>Ubicacion: Guatemala, calle no.234</p>
 
-          <button className="details-btn">
-            Detalles
-          </button>
+          <Button onClick={() => navigate('/dashboard/detailroom')} classname="details-btn" titulo="Detalles">
+          </Button>
 
         </div>
 
