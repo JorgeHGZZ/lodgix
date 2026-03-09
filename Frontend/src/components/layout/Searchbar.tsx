@@ -6,7 +6,8 @@ function Searchbar() {
     return(
         <div className="searchbar">
             <Input type="text" placeholder="Search..."></Input>
-            <Button titulo="Buscar" />
+            <br></br>
+            <Button  classname="search-btn" titulo="Buscar" />
         </div>
     )
 }
