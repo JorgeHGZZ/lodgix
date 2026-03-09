@@ -1,36 +1,9 @@
 @import url("./main.css");
 .filters{
- margin-top:20px;
+margin-top: 7px;
   display:flex;
   gap:20px;
   justify-content:left;
-}
-
-.filter{
-  background:#cbc8bf;
-  padding:10px;
-  border-radius:8px;
-}
-
-.bed-filter{
-  margin-top:20px;
-  display:flex;
-  gap:10px;
-  justify-content:center;
-}
-
-.search-bar{
-  display:flex;
-  gap:20px;
-}
-
-.search-item{
-  background:#eee;
-  padding:10px;
-  border-radius:8px;
-  display:flex;
-  gap:5px;
-  align-items:center;
 }
 
 .search-btn{
