@@ -11,6 +11,7 @@ import Clients from "../pages/dashboard/Clients";
 import Maintenance from "../pages/dashboard/Maintenance";
 import Cleaning from "../pages/dashboard/CleanService";
 import Reports from "../pages/dashboard/Reports";
+import Home from "../pages/dashboard/Home";
 
 const AppRouter = () => {
     return (
@@ -21,7 +22,7 @@ const AppRouter = () => {
                 <Route path="/register" element={<SignUp />} />
 
                 <Route path="/dashboard" element={<Dashboard />}>
-                    <Route index element={<Rooms />} />
+                    <Route index element={<Home />} />
                     <Route path="rooms" element={<Rooms />} />
                     <Route path="reservaciones" element={<Reservations />} />
                     <Route path="clientes" element={<Clients />} />

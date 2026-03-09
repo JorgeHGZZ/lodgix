@@ -1,0 +1,26 @@
+@import url("./main.css");
+
+.RoomCard{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    width: 200px;
+    text-align: center;
+}
+
+.Ocupada{
+    background-color: var(--secondary-color);
+}
+
+.Disponible{
+    background-color: var(--primary-color);
+}
+
+.Mantenimiento{
+    background-color: var(--mantenimiento-color);
+}
+
+.Limpieza{
+    background-color: var(--limpieza-color);
+}
