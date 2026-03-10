@@ -66,6 +66,17 @@ function Payment() {
 
           <div className="cash-info">
 
+            <p>Nombre</p>
+            <input type="text" placeholder=""/>
+
+            <p>Apellidos</p>
+            <input type="text" placeholder=""/>
+
+            <p>Correo electrónico</p>
+            <input type="email" placeholder=""/>
+
+            <p>Número de celular</p>
+            <input type="tel" placeholder="+52 "/>
             <p>
               Podrás pagar en efectivo al momento de tu llegada al hotel.
             </p>
