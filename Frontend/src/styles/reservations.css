@@ -1,4 +1,8 @@
-@import url("./main.css");
+.h1{
+color: #716c50;
+
+}
+
 .filters{
 margin-top: 7px;
   display:flex;
