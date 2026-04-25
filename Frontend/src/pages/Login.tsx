@@ -1,12 +1,15 @@
-/*import { useState, FormEvent } from "react";
-import authService from "../services/authService";*/
-import style from "../styles/Login.module.css"
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import type { FormEvent } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import authService from "../services/authService.ts";
+import style from "../styles/Login.module.css";
 
 function Login() {
-    /*const [email, setEmail] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const validarEmail = (email: string): boolean => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -30,33 +33,56 @@ function Login() {
             return;
         }
 
+        setLoading(true);
         try {
             const response = await authService.login(email, password);
             localStorage.setItem("token", response.token);
-            alert("Login exitoso");
-        } catch (err) {
-            setError("Error al iniciar sesión");
+            navigate("/dashboard");
+        } catch {
+            setError("Error al iniciar sesión. Revisa tus credenciales.");
+        } finally {
+            setLoading(false);
         }
-
-    };*/
+    };
 
     return (
         <div className={style.loginContainer}>
             <div className={style.formContainer}>
                 <p className={style.title}>Login</p>
-                <form className={style.form}>
+                <form className={style.form} onSubmit={handleSubmit}>
                     <div className={style.inputGroup}>
-                        <label className={style.label} htmlFor="username">Username</label>
-                        <input className={style.input} type="text" name="username" id="username" placeholder="" />
+                        <label className={style.label} htmlFor="email">Email</label>
+                        <input
+                            className={style.input}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="ejemplo@correo.com"
+                            autoComplete="email"
+                        />
                     </div>
                     <div className={style.inputGroup}>
                         <label className={style.label} htmlFor="password">Password</label>
-                        <input className={style.input} type="password" name="password" id="password" placeholder="" />
+                        <input
+                            className={style.input}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="******"
+                            autoComplete="current-password"
+                        />
                         <div className={style.forgot}>
                             <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
                         </div>
                     </div>
-                    <NavLink to="/dashboard" className={style.sign}>Sign in</NavLink>
+                    {error && <p className={style.errorMessage}>{error}</p>}
+                    <button className={style.submitButton} type="submit" disabled={loading}>
+                        {loading ? "Cargando..." : "Login"}
+                    </button>
                 </form>
                 <div className={style.socialMessage}>
                     <div className={style.line}></div>
@@ -85,3 +111,6 @@ function Login() {
 }
 
 export default Login;
+
+
+//<NavLink to="/dashboard" className={style.sign}>Sign in</NavLink>

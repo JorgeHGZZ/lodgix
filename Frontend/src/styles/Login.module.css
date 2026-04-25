@@ -87,6 +87,34 @@
     border-color: var(--primary-color);
 }
 
+.errorMessage {
+    margin: 0.75rem 0;
+    color: #f87171;
+    font-size: 0.9rem;
+}
+
+.submitButton {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submitButton:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: rgba(99, 102, 241, 0.9);
+}
+
 .forgot {
     display: flex;
     justify-content: flex-end;

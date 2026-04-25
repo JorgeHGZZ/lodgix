@@ -1,4 +1,4 @@
-interface LoginResponse {
+interface AuthResponse {
     message: string;
     token: string;
 }
@@ -10,7 +10,7 @@ interface LoginRequest {
 
 const API_URL = "http://localhost:5000/api/auth";
 
-const login = async (email: string, password: string): Promise<LoginResponse> => {
+const login = async (email: string, password: string): Promise<AuthResponse> => {
 
     const response = await fetch(`${API_URL}/login`, {
         method: "POST",
@@ -27,13 +27,29 @@ const login = async (email: string, password: string): Promise<LoginResponse> =>
         throw new Error("Error en login");
     }
 
-    const data: LoginResponse = await response.json();
+    const data: AuthResponse = await response.json();
 
     return data;
 };
 
-const authService = {
-    login
+const register = async (email: string, password: string): Promise<AuthResponse> => {
+
+    const response = await fetch(`${API_URL}/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    });
+
+    if (!response.ok) {
+        throw new Error("Error en registro");
+    }
+
+    return await response.json();
 };
 
-export default authService;
+export default {
+    login,
+    register
+};
