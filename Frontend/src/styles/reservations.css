@@ -1,3 +1,9 @@
+
+.h1{
+  margin-top: 0;  /* 🔥 CLAVE */
+
+}
+
 .reservations-wrapper{
     background-color: var(--bg-color);
     padding: 20px 30px;
