@@ -1,17 +1,16 @@
-/* CONTENEDOR */
+
 .reports-container{
   padding:30px;
   background: var(--bg-color);
   min-height:100vh;
 }
 
-/* TITULO */
 .h1{
   color: var(--primary-color);
   font-weight:700;
 }
 
-/* FILTROS */
+
 .reports-filters{
   display:flex;
   gap:12px;
@@ -35,7 +34,6 @@
   border:1px solid var(--secondary-color);
 }
 
-/* BOTON */
 .btn-primary{
   background: var(--secondary-color);
   color:white;
@@ -52,7 +50,6 @@
   transform:translateY(-2px);
 }
 
-/* 📊 STATS */
 .reports-stats{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
@@ -83,7 +80,6 @@
   margin-top:5px;
 }
 
-/* 📈 GRAFICA */
 .chart-card{
   background: var(--card-color);
   padding:20px;
@@ -111,7 +107,6 @@
   background: var(--primary-color);
 }
 
-/* TABLA */
 .reports-table-container{
   background: var(--card-color);
   padding:20px;
@@ -141,7 +136,7 @@
   background:#fafafa;
 }
 
-/* ESTADOS */
+
 .status-done{
   background: rgba(107,143,113,0.2);
   color: var(--disponible);
@@ -155,7 +150,6 @@
   border-radius:20px;
 }
 
-/* ANIMACION */
 .reports-container{
   animation: fadeUp 0.5s ease;
 }
