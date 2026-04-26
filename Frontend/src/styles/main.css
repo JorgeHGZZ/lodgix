@@ -1,5 +1,5 @@
 :root{
-     --primary-color: #221d1a;   /* café oscuro elegante */
+     --primary-color: #221d1a;   /* café oscuro */
     --secondary-color: #c6a97e; /* dorado suave */
     --bg-color: #f5f1ea;        /* crema */
     --card-color: #ffffff;
@@ -31,6 +31,6 @@ body{
     padding: 25px;
     box-sizing: border-box;
 
-    overflow-y: auto;   /* ✅ scroll vertical */
-    overflow-x: hidden; /* ✅ sin scroll lateral */
-}      /* ✅ importante */
+    overflow-y: auto;   
+    overflow-x: hidden; 
+}    
