@@ -2,7 +2,8 @@ import Room from "../models/Room.js";
 
 export const createRoom = async (req, res) => {
     try {
-        const { number, description, price, capacity, category } = req.body;
+        const body = req.body || {};
+        const { number, description, price, capacity, category } = body;
 
         if (!number || !description || !price || !capacity || !category) {
             return res.status(400).json({
@@ -65,10 +66,13 @@ export const getRoomById = async (req, res) => {
     }
 };
 
-export const updateRoom = async (req, res) => {
+export const updateRoom = async (req, res)=>{
+
+    console.log("Actualizando habitación con ID:", req.params.id);
+    console.log("Datos recibidos:", req.body);
     try {
         const { id } = req.params;
-        const { number, description, price, capacity, category, available } = req.body;
+        const { number, description, price, capacity, category, available} = req.body;
 
         // Verificar si el nuevo número ya está en uso por otra habitación
         if (number) {
@@ -78,27 +82,23 @@ export const updateRoom = async (req, res) => {
             }
         }
 
-        const room = await Room.findByIdAndUpdate(
-            id,
-            { number, description, price, capacity, category, available },
-            { new: true }
-        );
+        // Construir objeto de actualización
+        const updateData = { number, description, price, capacity, category, available };
 
+        const room = await Room.findByIdAndUpdate(id, updateData, { new: true }).select("number description price capacity category available");
         if (!room) {
             return res.status(404).json({ message: "Habitación no encontrada" });
         }
 
-        res.status(200).json({
-            message: "Habitación actualizada correctamente",
-            room
-        });
+        res.status(200).json({message: "Habitación actualizada correctamente"});
+
     } catch (error) {
         res.status(500).json({
             message: "Error al actualizar habitación",
             error: error.message
         });
     }
-};
+}
 
 export const deleteRoom = async (req, res) => {
     try {
