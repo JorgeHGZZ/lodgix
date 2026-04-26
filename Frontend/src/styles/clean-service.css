@@ -2,6 +2,7 @@
 .h1{
   color: var(--primary-color);
   font-weight:700;
+    margin-top: 0;
 }
 .cleaning-container{
   padding:30px;
