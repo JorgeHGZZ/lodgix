@@ -1,0 +1,172 @@
+/* CONTENEDOR */
+.reports-container{
+  padding:30px;
+  background: var(--bg-color);
+  min-height:100vh;
+}
+
+/* TITULO */
+.h1{
+  color: var(--primary-color);
+  font-weight:700;
+}
+
+/* FILTROS */
+.reports-filters{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:20px 0;
+
+  background: var(--card-color);
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.reports-filters select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+.reports-filters select:focus{
+  outline:none;
+  border:1px solid var(--secondary-color);
+}
+
+/* BOTON */
+.btn-primary{
+  background: var(--secondary-color);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.25s;
+}
+
+.btn-primary:hover{
+  background:#b89563;
+  transform:translateY(-2px);
+}
+
+/* 📊 STATS */
+.reports-stats{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap:20px;
+  margin:25px 0;
+}
+
+.stat-card{
+  background: var(--card-color);
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:0.25s;
+}
+
+.stat-card:hover{
+  transform:translateY(-4px);
+}
+
+.stat-card p{
+  font-size:13px;
+  opacity:0.7;
+}
+
+.stat-card h3{
+  color: var(--secondary-color);
+  margin-top:5px;
+}
+
+/* 📈 GRAFICA */
+.chart-card{
+  background: var(--card-color);
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  margin-bottom:25px;
+}
+
+.chart{
+  display:flex;
+  align-items:flex-end;
+  gap:12px;
+  height:180px;
+  margin-top:15px;
+}
+
+.bar{
+  flex:1;
+  background: var(--secondary-color);
+  border-radius:6px;
+  transition:0.3s;
+}
+
+.bar:hover{
+  background: var(--primary-color);
+}
+
+/* TABLA */
+.reports-table-container{
+  background: var(--card-color);
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.reports-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+.reports-table th{
+  background: var(--primary-color);
+  color:white;
+  padding:12px;
+  text-align:left;
+}
+
+.reports-table td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+}
+
+.reports-table tr:hover{
+  background:#fafafa;
+}
+
+/* ESTADOS */
+.status-done{
+  background: rgba(107,143,113,0.2);
+  color: var(--disponible);
+  padding:4px 10px;
+  border-radius:20px;
+}
+
+.status-pending{
+  background:#ececec;
+  padding:4px 10px;
+  border-radius:20px;
+}
+
+/* ANIMACION */
+.reports-container{
+  animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
