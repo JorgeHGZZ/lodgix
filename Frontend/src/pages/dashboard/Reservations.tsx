@@ -7,7 +7,7 @@ import Button from "../../components/ui/Button";
 function Reservations() {
   const navigate = useNavigate();
     return (
-        <>
+        <div className="reservations-wrapper">
         <div>
             <h1 className="h1">Reservaciones</h1>
             {/* <p>Si ves esto, el Outlet está funcionando.</p> */}
@@ -47,7 +47,7 @@ function Reservations() {
         <h2>Grandes ahorros en tus viajes</h2>
 
       </div>
-
+      <div className="offers-section">
       <div className="offers-container">
         <div className="hotel-card">
 
@@ -88,6 +88,7 @@ function Reservations() {
             Detalles
           </button>
 
+        </div> 
         </div>
 
         <div className="more-offers">
@@ -96,13 +97,10 @@ function Reservations() {
             Ver mas ofertas
           </button>
 
-        </div>
-
       </div>
-
-
         
-        </>
+        </div>
+        </div>
     );
 
    
