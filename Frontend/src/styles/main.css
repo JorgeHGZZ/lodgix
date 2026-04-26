@@ -1,10 +1,12 @@
 :root{
-    --primary-color: #716c50;
-    --secondary-color: #773e24;
-    --mantenimiento-color: #facc15;
-    --bg-color: #fffaea;
-    --limpieza-color: #b8d0cc;
-    --text-color: #333;
+    --primary-color: #1f2937;     /* azul oscuro elegante */
+    --secondary-color: #c8a97e;   /* dorado suave */
+    --bg-color: #f9fafb;          /* blanco elegante */
+    --text-color: #111827;        /* casi negro */
+
+    --mantenimiento-color: #f59e0b; /* ámbar (mejor que amarillo chillón) */
+    --limpieza-color: #10b981;
+
 }
 
 body{
