@@ -1,11 +1,3 @@
-:root{
-    --primary-color: #716c50;
-    --secondary-color: #773e24;
-    --mantenimiento-color: #facc15;
-    --bg-color: #fffaea;
-    --limpieza-color: #b8d0cc;
-    --text-color: #333;
-}
 
 .filters{
  justify-content:left;
