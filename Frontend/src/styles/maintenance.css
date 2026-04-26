@@ -10,7 +10,6 @@ h1{
   min-height:100vh;
 }
 
-/* HEADER / FILTROS */
 .maintenance-header{
   background: var(--card-color);
   padding:18px;
