@@ -36,7 +36,6 @@
     cursor: pointer;
 }
 
-/* BODY */
 
 .CardBody {
     text-align: center;
@@ -49,7 +48,6 @@
     font-weight: 600;
 }
 
-/* FOOTER */
 
 .CardFooter {
     display: flex;
