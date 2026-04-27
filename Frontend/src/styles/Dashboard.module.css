@@ -1,5 +1,6 @@
 @import url("./main.css");
 
+
 .DashboardContainer {
     display: grid;
     grid-template-columns: 15% 1fr 1fr;
@@ -7,6 +8,7 @@
     gap: 0px 0px;
     width: 100vw;
     height: 100vh;
+     
 }
 
 .item:nth-child(1) {
