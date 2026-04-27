@@ -1,3 +1,10 @@
+.loginContainer{
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .formContainer {
     width: 320px;
@@ -5,7 +12,7 @@
     background-color: var(--bg-color);
     padding: 2rem;
     color: var(--primary-color);
-
+    
 }
 
 .title {
