@@ -1,20 +1,20 @@
-@import url("./main.css");
-
 .RoomCard {
     width: 15%;
-    border-radius: 10px;
+    border-radius: 14px;
     padding: 12px;
-    color: white;
+    color: var(--card-color);
+    background: var(--card-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s;
+    transition:  all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .RoomCard:hover {
-    transform: translateY(-3px);
+     transform: translateY(-3px);
 }
+
 
 /* HEADER */
 
@@ -34,18 +34,18 @@
     cursor: pointer;
 }
 
-/* BODY */
 
 .CardBody {
     text-align: center;
     font-size: 14px;
+    /* border: 1px solid #eee3d5; */
+
 }
 
 .CardBody p:first-child {
     font-weight: 600;
 }
 
-/* FOOTER */
 
 .CardFooter {
     display: flex;
@@ -68,17 +68,21 @@
     margin: 5px 0;
 }
 .Ocupada {
-    background-color: var(--secondary-color);
+    background-color: var(--ocupada);
+    border-left: 6px solid var(--ocupada);
 }
 
 .Disponible {
-    background-color: var(--primary-color);
+    background-color: var(--disponible);
+    border-left: 6px solid var(--disponible);
 }
 
 .Mantenimiento {
-    background-color: var(--mantenimiento-color);
+    background-color: var(--mantenimiento);
+    border-left: 6px solid var(--mantenimiento);
 }
 
 .Limpieza {
-    background-color: var(--limpieza-color);
+    background-color: var(--limpieza);
+    border-left: 6px solid var(--limpieza);
 }
