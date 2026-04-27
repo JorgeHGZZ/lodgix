@@ -1,17 +1,35 @@
 :root{
-    --primary-color: #716c50;
-    --secondary-color: #773e24;
-    --mantenimiento-color: #facc15;
-    --bg-color: #fffaea;
-    --limpieza-color: #b8d0cc;
-    --text-color: #333;
+     --primary-color: #221d1a;   /* café oscuro */
+    --secondary-color: #c6a97e; /* dorado suave */
+    --bg-color: #f5f1ea;        /* crema */
+    --card-color: #ffffff;
+    --text-color: #2b2b2b;
+
+    --ocupada: #a44a3f;        /* terracota */
+    --disponible: #6b8f71;     /* verde oliva */
+    --mantenimiento: #d4a373;  /* arena cálida */
+    --limpieza: #7aa6a1;       /* verde-azulado suave */
+
+
 }
 
 body{
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+   
     align-items: center;
+    overflow-y: auto;
+  overflow-x: hidden;
 
 }
+
+.item:nth-child(3) {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+
+    padding: 25px;
+    box-sizing: border-box;
+
+    overflow-y: auto;   
+    overflow-x: hidden; 
+}    
