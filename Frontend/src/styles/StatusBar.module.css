@@ -1,33 +1,39 @@
-@import url("./main.css");
-
-
 .StatusBar {
-    padding: 10px;
-    height: 100%;
+    padding: 10px 20px;
     display: flex;
-    flex-direction: row;
+    gap: 10px;
     align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
+    justify-content: flex-end;
 }
 
 .status{
-    padding: 10px;
-    color: white;
+    padding: 12px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: azure;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.status:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .ocupada{
-    background-color: var(--secondary-color);
+    background-color: var(--ocupada);
 }
 
 .disponible{
-    background-color: var(--primary-color);
+    background-color: var(--disponible);
 }
 
 .mantenimiento{
-    background-color: var(--mantenimiento-color);
+    background-color: var(--mantenimiento);
 }
 
 .limpieza{
-    background-color: var(--limpieza-color);
+    background-color: var(--limpieza);
 }
