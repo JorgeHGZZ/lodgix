@@ -7,7 +7,7 @@ import styles from "../../styles/Sidebar.module.css";
 function Sidebar() {
     return (
         <aside className={styles.sidebar}>
-            <h1>Lodgix</h1>
+            <h1 className={styles.titulo}>Lodgix</h1>
             <hr className={styles.line} />
             <SidebarMenu />
             <hr className={styles.line} />

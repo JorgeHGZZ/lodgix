@@ -1,5 +1,6 @@
 import RoomCard from "../../components/layout/RoomCard";
 import styles from "../../styles/Rooms.module.css"
+import Topbar from "../../components/layout/Topbar.tsx";
 
 const rooms = [
     { id: 101, status: "Disponible", category: "Doble" },
@@ -19,6 +20,7 @@ function Rooms() {
     return (
         <div>
             <h1 className={styles.title}>Gestión de Habitaciones</h1>
+            <Topbar />
             <div className={styles.RoomsContainer} >
                 {
                     rooms.map((room) => (
