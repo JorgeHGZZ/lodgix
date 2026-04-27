@@ -4,7 +4,7 @@ function CleanService(){
     return (
         <>
         <div>
-            <h1 className="h1">Servicio de limpieza</h1>
+            <h1>Servicio de limpieza</h1>
             {/* <p>Si ves esto, el Outlet está funcionando.</p> */}
         </div>
 
@@ -21,6 +21,25 @@ function CleanService(){
             <option>En limpieza</option>
             <option>Limpia</option>
           </select>
+
+          <div className="cleaning-stats">
+
+          <div className="stat-card">
+          <p>Pendientes</p>
+            <h3>4</h3>
+          </div>
+
+        <div className="stat-card">
+        <p>En limpieza</p>
+        <h3>2</h3>
+        </div>
+
+      <div className="stat-card">
+      <p>Completadas</p>
+        <h3>8</h3>
+      </div>
+
+</div>
 
            <button className="btn-add">Buscar</button>
 
