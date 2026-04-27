@@ -4,66 +4,70 @@ import "../styles/App.css"
 import dashboardimg from "../assets/images/dashboard.png"
 import { useNavigate } from "react-router"
 
-
 function Landing() {
 
     const navigate = useNavigate();
+
     return (
         <>
             <Navbar />
-            <section className="inicio">
-                <div className="texto">
-                    <h1>Gestiona tu hotel de forma simple, rápida y sin errores</h1>
-                    <p>Controla reservas, habitaciones, huéspedes y pagos desde un solo lugar.
-                        Nuestro sistema centraliza toda la operación del hotel en una sola plataforma</p>
+
+            {/* HERO */}
+            <section className="hero">
+                <div className="hero-text">
+                    <h1>Gestiona tu hotel de forma simple y profesional</h1>
+                    <p>
+                        Controla reservas, habitaciones, huéspedes y pagos desde un solo lugar.
+                        Nuestro sistema centraliza toda la operación del hotel en una sola plataforma.
+                    </p>
+
+                      <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
+                      
                 </div>
-                <img src={dashboardimg} alt="Hotel" />
+
+                <img src={dashboardimg} alt="Dashboard" />
             </section>
-            <section className="container">
-                <div className="item">
-                    <h1 className="uno">Gestion de habitaciones</h1>
-                    <ul className="ul-uno">
-                        <li>Disponibilidad en tiempo real</li>
-                        <li>Estados: libre, ocupada, limpieza, mantenimiento</li>
-                    </ul>
+
+            {/* FEATURES */}
+            <section className="features">
+
+                <div className="feature-card">
+                    <h3>Habitaciones</h3>
+                    <p>Disponibilidad en tiempo real y control total de estados.</p>
                 </div>
-                <div className="item">
-                    <h1>Reservas</h1>
-                    <ul>
-                        <li>Registro rápido de huéspedes</li>
-                        <li>Evita overbooking</li>
-                        <li>Calendario visual</li>
-                    </ul>
+
+                <div className="feature-card">
+                    <h3>Reservas</h3>
+                    <p>Gestión rápida, sin errores ni overbooking.</p>
                 </div>
-                <div className="item">
-                    <h1>Pagos y facturacion</h1>
-                    <ul>
-                        <li>Control de pagos</li>
-                        <li>Reportes claros</li>
-                        <li>Exportación de datos</li>
-                    </ul>
+
+                <div className="feature-card">
+                    <h3>Pagos</h3>
+                    <p>Control de ingresos y reportes claros.</p>
                 </div>
-                <div className="item">
-                    <h1 className="cuatro">Reportes</h1>
-                    <ul>
-                        <li>Ocupación</li>
-                        <li>Ingresos</li>
-                        <li>Fechas personalizadas</li>
-                    </ul>
+
+                <div className="feature-card">
+                    <h3>Reportes</h3>
+                    <p>Analiza ocupación e ingresos fácilmente.</p>
                 </div>
-                <div className="item">
-                    <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
+
+                <div className="feature-card">
+                    <h3>Huéspedes</h3>
+                    <p>Historial completo y datos organizados.</p>
                 </div>
-                <div className="item">
-                    <h1 className="seis">Huespedes</h1>
-                    <ul>
-                        <li>Historial completo</li>
-                        <li>Datos y preferencias</li>
-                    </ul>
-                </div>
+
             </section>
+
+            <section className="cta">
+                <h2>Empieza a gestionar tu hotel hoy</h2>
+               
+                     <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
+                
+                
+            </section>
+
             <footer>
-                <p>&copy; 2023 Lodgix. Todos los derechos reservados.</p>
+                <p>&copy; 2026 Lodgix. Todos los derechos reservados.</p>
             </footer>
         </>
     )
