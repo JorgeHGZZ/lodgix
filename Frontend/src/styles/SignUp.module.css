@@ -1,30 +1,57 @@
 
-
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-}
-
 .form {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    max-width: 350px;
+
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 350px;
+    gap: 12px;
+
     background-color: var(--bg-color);
     padding: 20px;
+
     border-radius: 20px;
-    position: relative;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
+
+/* .form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    width: 100%;
+    max-width: 350px;
+
+    background-color: var(--bg-color);
+
+    padding: 28px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+
+    box-sizing: border-box;
+} */
 
 .title {
     font-size: 28px;
     color: var(--primary-color);
     font-weight: 600;
     letter-spacing: -1px;
+
     position: relative;
     display: flex;
     align-items: center;
+
     padding-left: 30px;
 }
 
@@ -32,25 +59,29 @@ body {
 .title::after {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
     left: 0px;
     background-color: var(--primary-color);
 }
 
-.title::before {
-    width: 18px;
-    height: 18px;
-    background-color: var(--primary-color);
-}
-
 .title::after {
-    width: 18px;
-    height: 18px;
     animation: pulse 1s linear infinite;
 }
 
+@keyframes pulse {
+    from {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+    to {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* ================= TEXTOS ================= */
 .message,
 .signin {
     color: rgba(88, 87, 87, 0.822);
@@ -66,83 +97,130 @@ body {
 }
 
 .signin a:hover {
-    text-decoration: underline royalblue;
+    text-decoration: underline;
 }
 
+/* ================= INPUTS ================= */
 .flex {
     display: flex;
-    width: 95%;
-    gap: 6px;
+    width: 100%;
+    gap: 10px;
 }
 
 .form label {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .form label .input {
-    width: 90%;
-    padding: 10px 10px 20px 10px;
+    width: 100%;
+    padding: 12px;
+
     outline: 0;
+
     border: 1px solid rgba(105, 105, 105, 0.397);
     border-radius: 10px;
-    background-color: --var(--bg-color);
+
+    background-color: var(--bg-color);
+
+    color: var(--primary-color);
+
+    box-sizing: border-box;
 }
 
 .input:focus {
     border-color: var(--primary-color);
 }
 
-.form label .input+span {
+
+.form label .input + span {
     position: absolute;
     left: 10px;
-    top: 15px;
-    color: var(--primary-color);
+    top: 12px;
+
     font-size: 0.9em;
-    cursor: text;
+    color: var(--primary-color);
+
     transition: 0.3s ease;
 }
 
-.form label .input:placeholder-shown+span {
-    top: 15px;
-    font-size: 0.9em;
-}
-
-.form label .input:focus+span,
-.form label .input:valid+span {
-    top: 30px;
+.form label .input:focus + span,
+.form label .input:valid + span {
+    top: -8px;
     font-size: 0.7em;
-    font-weight: 600;
+
+    background: var(--bg-color);
+    padding: 0 4px;
 }
 
-.form label .input:valid+span {
-    color: var(--primary-color);
-}
-
+/* ================= BOTÓN ================= */
 .submit {
     border: none;
     outline: none;
+
     background-color: var(--primary-color);
-    padding: 10px;
+
+    padding: 12px;
+
     border-radius: 10px;
+
     color: var(--bg-color);
+
     font-size: 16px;
-    transform: .3s ease;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
 }
 
 .submit:hover {
-    background-color: var(--primary-color);
     transform: scale(1.05);
-    transition: .3s ease;
 }
 
-@keyframes pulse {
-    from {
-        transform: scale(0.9);
-        opacity: 1;
-    }
+/* ================= SOCIAL ================= */
+.socialMessage {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
 
-    to {
-        transform: scale(1.8);
-        opacity: 0;
-    }
+.line {
+    height: 1px;
+    flex: 1;
+    background-color: rgba(55, 65, 81, 1);
+}
+
+.socialMessage .message {
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(156, 163, 175, 1);
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    border-radius: 0.125rem;
+    padding: 0.75rem;
+
+    border: none;
+    background: transparent;
+
+    margin-left: 8px;
+}
+
+.icon svg {
+    height: 1.25rem;
+    width: 1.25rem;
+    fill: var(--primary-color);
+}
+
+/* ================= SIGNUP ================= */
+.signup {
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(156, 163, 175, 1);
 }
