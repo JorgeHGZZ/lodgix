@@ -5,7 +5,7 @@ function Maintenance(){
     return ( 
     <>
          <div>
-            <h1 className="h1">Mantenimiento</h1>
+            <h1 >Mantenimiento</h1>
             {/* <p>Si ves esto, el Outlet está funcionando.</p> */}
         </div> 
        
@@ -77,3 +77,4 @@ function Maintenance(){
 }
 
 export default Maintenance;
+
