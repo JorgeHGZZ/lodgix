@@ -1,9 +1,11 @@
+
+
 .RoomCard {
     width: 15%;
     border-radius: 14px;
     padding: 12px;
     color: var(--card-color);
-    background: var(--card-color);
+   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,6 +25,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
+    
 }
 
 .CardHeader button {
@@ -86,3 +89,4 @@
     background-color: var(--limpieza);
     border-left: 6px solid var(--limpieza);
 }
+
