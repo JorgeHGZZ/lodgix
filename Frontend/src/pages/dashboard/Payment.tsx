@@ -107,7 +107,6 @@ function Payment() {
 
       </div>
 
-      {/* RESUMEN */}
       <div className="payment-summary">
 
         <div className="summary-card">
