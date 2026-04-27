@@ -7,7 +7,7 @@
   justify-content:center;
 }
 
-/* FORM */
+
 .payment-form{
   width:420px;
   background:var(--card-color);
@@ -21,7 +21,6 @@
   margin-bottom:20px;
 }
 
-/* MÉTODO */
 .payment-method{
   display:flex;
   gap:10px;
@@ -43,7 +42,7 @@
   color:white;
 }
 
-/* FORM GRID */
+
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -109,7 +108,7 @@
   box-shadow:0 6px 12px rgba(0,0,0,0.15);
 }
 
-/* SUMMARY */
+
 .payment-summary{
   display:flex;
   align-items:center;
