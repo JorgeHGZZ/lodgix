@@ -2,7 +2,7 @@
 
 .sidebar {
     background-color: var(--primary-color);
-    color: var(--bg-color);
+    color: var(--card-color);
     height: 100vh;
     padding: 20px;
     width: 100%;
