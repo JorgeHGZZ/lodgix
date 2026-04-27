@@ -1,10 +1,4 @@
 
-h1{
-  color: var(--primary-color);
-  font-weight: 700;
-    margin-top: 0;
-}
-
 .maintenance-container{
   padding:30px;
   background: var(--bg-color);

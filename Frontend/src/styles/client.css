@@ -9,10 +9,17 @@
     margin-top: 0;
 }
 
+.h1{
+    margin-top: 0;
+}
+
 .reservation-title{
   font-size:26px;
   font-weight:700;
+  font-weight:700;
   margin-bottom:25px;
+  color: var(--primary-color);
+    margin-top: 0;
   color: var(--primary-color);
     margin-top: 0;
 }
@@ -21,10 +28,29 @@
   background: var(--card-color);
   border-radius:20px;
   padding:25px;
+  background: var(--card-color);
+  border-radius:20px;
+  padding:25px;
   display:flex;
+  gap:25px;
   gap:25px;
   align-items:center;
   width:900px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform: translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0);
+  }
 
   box-shadow:0 10px 30px rgba(0,0,0,0.1);
 
@@ -59,7 +85,14 @@
   margin:6px 0;
   color: var(--text-color);
   font-size:14px;
+  color: var(--text-color);
+  font-size:14px;
 }
+
+.reservation-left strong{
+  color: var(--primary-color);
+}
+
 
 .reservation-left strong{
   color: var(--primary-color);
@@ -68,12 +101,16 @@
 .reservation-right{
   text-align:right;
   color: var(--text-color);
+  color: var(--text-color);
 }
 
 /* 💰 PRECIO DESTACADO */
 .price-total{
   font-size:30px;
+  font-size:30px;
   font-weight:700;
+  color: var(--secondary-color);
+  margin-bottom:8px;
   color: var(--secondary-color);
   margin-bottom:8px;
 }
@@ -90,13 +127,18 @@
   margin-top:20px;
   display:flex;
   gap:12px;
+  gap:12px;
   justify-content:flex-end;
 }
 
 /* CHECK IN */
+/* CHECK IN */
 .checkin-btn{
   background: var(--disponible);
+  background: var(--disponible);
   border:none;
+  padding:10px 20px;
+  border-radius:10px;
   padding:10px 20px;
   border-radius:10px;
   color:white;
@@ -108,20 +150,38 @@
 .checkin-btn:hover{
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  font-weight:600;
+  transition: all 0.25s;
+}
+
+.checkin-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 /* CHECK OUT */
+/* CHECK OUT */
 .checkout-btn{
   background: var(--ocupada);
+  background: var(--ocupada);
   border:none;
+  padding:10px 20px;
+  border-radius:10px;
+  color:white;
   padding:10px 20px;
   border-radius:10px;
   color:white;
   cursor:pointer;
   font-weight:600;
   transition: all 0.25s;
+  font-weight:600;
+  transition: all 0.25s;
 }
 
+.checkout-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
 .checkout-btn:hover{
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);

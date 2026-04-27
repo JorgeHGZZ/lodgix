@@ -8,6 +8,7 @@ function Landing() {
 
     const navigate = useNavigate();
 
+
     return (
         <>
             <Navbar />
@@ -26,7 +27,16 @@ function Landing() {
                 </div>
 
                 <img src={dashboardimg} alt="Dashboard" />
+
+                <img src={dashboardimg} alt="Dashboard" />
             </section>
+
+            {/* FEATURES */}
+            <section className="features">
+
+                <div className="feature-card">
+                    <h3>Habitaciones</h3>
+                    <p>Disponibilidad en tiempo real y control total de estados.</p>
 
             {/* FEATURES */}
             <section className="features">
@@ -39,7 +49,15 @@ function Landing() {
                 <div className="feature-card">
                     <h3>Reservas</h3>
                     <p>Gestión rápida, sin errores ni overbooking.</p>
+
+                <div className="feature-card">
+                    <h3>Reservas</h3>
+                    <p>Gestión rápida, sin errores ni overbooking.</p>
                 </div>
+
+                <div className="feature-card">
+                    <h3>Pagos</h3>
+                    <p>Control de ingresos y reportes claros.</p>
 
                 <div className="feature-card">
                     <h3>Pagos</h3>
@@ -49,7 +67,15 @@ function Landing() {
                 <div className="feature-card">
                     <h3>Reportes</h3>
                     <p>Analiza ocupación e ingresos fácilmente.</p>
+
+                <div className="feature-card">
+                    <h3>Reportes</h3>
+                    <p>Analiza ocupación e ingresos fácilmente.</p>
                 </div>
+
+                <div className="feature-card">
+                    <h3>Huéspedes</h3>
+                    <p>Historial completo y datos organizados.</p>
 
                 <div className="feature-card">
                     <h3>Huéspedes</h3>
@@ -64,9 +90,20 @@ function Landing() {
                      <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
                 
                 
+
             </section>
 
+            <section className="cta">
+                <h2>Empieza a gestionar tu hotel hoy</h2>
+               
+                     <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
+                
+                
+            </section>
+
+
             <footer>
+                <p>&copy; 2026 Lodgix. Todos los derechos reservados.</p>
                 <p>&copy; 2026 Lodgix. Todos los derechos reservados.</p>
             </footer>
         </>

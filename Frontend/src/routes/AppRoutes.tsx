@@ -14,7 +14,6 @@ import Reports from "../pages/dashboard/Reports";
 import Home from "../pages/dashboard/Home";
 
 //Rutas del lado del cliente
-import PLanding from "../pages/public/PLanding";
 import Landing2 from "../pages/public/PLanding2";
 import DetailRoom from "../pages/dashboard/DetailRoom";
 import Payment from "../pages/dashboard/Payment";
@@ -23,7 +22,7 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Landing2 />} />
+                <Route path="/pLanding2" element={<Landing2 />} />
 
 
                 <Route path="/landing" element={<Landing />} />

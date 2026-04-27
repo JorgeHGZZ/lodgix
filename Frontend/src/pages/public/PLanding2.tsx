@@ -30,20 +30,21 @@ function Landing2() {
             <section className={styles.hero}>
                 <div className={styles.heroText}>
                     <h1>
-                        Your Gateway to <br />
-                        Comfort and Convenience
+                       Tu puerta hacia la <br />
+                        comodidad y experiencias únicas
                     </h1>
-                    <p>Book now and get the best prices</p>
+                    <p>Reserva ahora y obtén los mejores precios</p>
                 </div>
             </section>
 
             {/* HOTELS */}
             <section className={styles.hotels}>
                 <div className={styles.sectionHeader}>
-                    <h2>Our Popular Rooms We Recommend for You</h2>
+                    <h2>Habitaciones populares que recomendamos para ti</h2>
                     <p>
-                        Discover our most popular rooms designed for comfort and relaxation.
-                        Choose the perfect room for your stay and enjoy a memorable experience.
+                          Descubre nuestras habitaciones más populares diseñadas para tu
+                        comodidad y descanso. Elige la opción perfecta y disfruta de una
+                        experiencia inolvidable.
                     </p>
                 </div>
 
@@ -51,10 +52,10 @@ function Landing2() {
                     <div className={styles.hotelCard}>
                         <img src={Hotel1} />
                         <h3>Deluxe King Room</h3>
-                        <p>1 King Bed • City View</p>
+                        <p>1 King Bed • Vista a la ciudad</p>
 
                         <div className={styles.cardFooter}>
-                            <span>$120 / night</span>
+                            <span>$1500 por noche</span>
                             <span><FaStar /> 4.9</span>
                         </div>
                     </div>
@@ -62,10 +63,10 @@ function Landing2() {
                     <div className={styles.hotelCard}>
                         <img src={Hotel2} />
                         <h3>Superior Double Room</h3>
-                        <p>2 Double Beds • Garden View</p>
+                        <p>2 camas dobles • Vista al jardin</p>
 
                         <div className={styles.cardFooter}>
-                            <span>$119 / night</span>
+                            <span>$1199 por noche</span>
                             <span><FaStar /> 4.8</span>
                         </div>
                     </div>
@@ -73,10 +74,10 @@ function Landing2() {
                     <div className={styles.hotelCard}>
                         <img src={Hotel3} />
                         <h3>Luxury Suite</h3>
-                        <p>King Bed • Ocean View</p>
+                        <p>King Bed • Vista al mar</p>
 
                         <div className={styles.cardFooter}>
-                            <span>$209 / night</span>
+                            <span>$2900 por noche</span>
                             <span><FaStar /> 4.9</span>
                         </div>
                     </div>
@@ -85,12 +86,11 @@ function Landing2() {
 
             {/* MEMORIES */}
             <section className={styles.memories}>
-                <h2>Unforgettable Memories Unparalleled Comfort</h2>
+                <h2>Recuerdos inolvidables y comodidad incomparable</h2>
                 <p>
-                    Experience ultimate travel comfort with our innovative hotel booking
-                    app.
+                    Vive la mejor experiencia de viaje con nuestra plataforma de reservas.
                 </p>
-                <button>Read More</button>
+                <button>Ver más</button>
                 <div className={styles.memoryImages}>
                     <img src={Rooms1} />
                     <img src={Rooms3} />
@@ -105,17 +105,17 @@ function Landing2() {
                 <div className={styles.statsGrid}>
                     <div>
                         <h3>800+</h3>
-                        <p>Cities</p>
+                        <p>Ciudades</p>
                     </div>
 
                     <div>
                         <h3>35,000+</h3>
-                        <p>Exclusive Hotels</p>
+                        <p>Hoteles exclusivos</p>
                     </div>
 
                     <div>
                         <h3>1.5M+</h3>
-                        <p>Exclusive Rooms</p>
+                        <p>Habitaciones disponibles</p>
                     </div>
                 </div>
             </section>
@@ -123,14 +123,14 @@ function Landing2() {
 
             {/* FOOTER */}
             <footer className={styles.footer}>
-                <h3>Subscribe to News and Resources</h3>
+                <h3>Suscríbete para recibir noticias y novedades</h3>
 
                 <div className={styles.subscribe}>
-                    <input placeholder="youremail@gmail.com" />
+                    <input placeholder="email@gmail.com" />
                     <button>Send</button>
                 </div>
 
-                <p>© GreenDoors</p>
+                <p>© Lodgix</p>
             </footer>
 
         </div>
