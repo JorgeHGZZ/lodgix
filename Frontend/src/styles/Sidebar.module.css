@@ -11,10 +11,11 @@
     align-items: start;
     box-sizing: border-box;
     border-radius: 12px;
-}
 
+
+}
 
 .line {
     width: 100%;
-    fill: var(--card-color);
+    fill: var(--bg-color);
 }
