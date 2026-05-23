@@ -16,7 +16,7 @@ function Reservations() {
 
         <div className="filter">
            Ubicacion
-          <select>
+          <select >
             <option>Ciudad de Mexico</option>
             <option>Veracruz</option>
           </select>

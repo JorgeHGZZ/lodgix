@@ -1,35 +1,54 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RoomCard from "../../components/layout/RoomCard";
-import styles from "../../styles/Rooms.module.css"
+import styles from "../../styles/Rooms.module.css";
+import api from "../../services/api.js";
 
-const rooms = [
-    { id: 101, status: "Disponible", category: "Doble" },
-    { id: 102, status: "Ocupada", category: "Suite", guestName: "María García López" },
-    { id: 103, status: "Mantenimiento", category: "Doble" },
-    { id: 104, status: "Limpieza", category: "Sencilla" },
-    { id: 105, status: "Disponible", category: "Suite" },
-    { id: 106, status: "Ocupada", category: "Doble", guestName: "Carlos Martínez Pérez" },
-    { id: 107, status: "Disponible", category: "Sencilla" },
-    { id: 108, status: "Mantenimiento", category: "Suite" },
-    { id: 109, status: "Limpieza", category: "Doble" },
-    { id: 110, status: "Disponible", category: "Sencilla" },
-];
-
+interface Room {
+    _id: string;
+    number: string;
+    status: string;
+    category: string;
+    guestName?: string;
+}
 
 function Rooms() {
+    const [rooms, setRooms] = useState<Room[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        api.get<Room[]>("/rooms")
+            .then((response) => {
+                setRooms(response.data);
+            })
+            .catch((err) => {
+                console.error("Error al obtener las habitaciones:", err);
+                setError("No se pudieron cargar las habitaciones.");
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <div>
             <h1 className={styles.title}>Gestión de Habitaciones</h1>
-            <div className={styles.RoomsContainer} >
-                {
-                    rooms.map((room) => (
-                        <RoomCard
-                            key={room.id}
-                            id={room.id}
-                            status={room.status}
-                            category={room.category}
-                            guestName={room.guestName}
-                        />
-                    ))}
+            <div className={styles.RoomsContainer}>
+                {loading && <p>Cargando habitaciones...</p>}
+                {error && <p className={styles.error}>{error}</p>}
+                {!loading && !error && rooms.length === 0 && <p>No hay habitaciones disponibles.</p>}
+                {!loading && !error && rooms.map((room) => (
+                    <RoomCard
+                        key={room._id}
+                        roomNumber={room.number}
+                        status={room.status}
+                        category={room.category}
+                        guestName={room.guestName}
+                        onClick={() => navigate(`/dashboard/detailroom/${room._id}`, { state: { room } })}
+                    />
+                ))}
             </div>
         </div>
     );

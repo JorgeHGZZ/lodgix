@@ -28,10 +28,10 @@ function Login() {
             return;
         }
 
-        if (!validarPassword(password)) {
+        /*if (!validarPassword(password)) {
             setError("La contraseña debe tener mayúscula, número y símbolo");
             return;
-        }
+        }*/
 
         setLoading(true);
         try {
