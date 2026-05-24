@@ -16,7 +16,7 @@ function Sidebar() {
         const token = localStorage.getItem("token");
         if (token) {
             const decoded = jwtDecode<TokenPayload>(token);
-            username = decoded.userName || "Usuario";
+            username = decoded.name || "Usuario";
             image = decoded.imageURL || "/images/default-avatar.png";
         }
     } catch (error) {

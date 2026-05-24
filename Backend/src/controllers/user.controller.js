@@ -1,4 +1,5 @@
 const JWT_SECRET = process.env.JWT_SECRET || "default";
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import { generarToken } from "../utils/validarToken.js";
 
@@ -11,6 +12,7 @@ export const register = async (req, res) => {
                 message: "Name, email, password y phone requeridos"
             });
         }
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Verificar si el usuario ya existe
         const exist = await User.findOne({ email });
@@ -25,7 +27,7 @@ export const register = async (req, res) => {
         const user = await User.create({ 
             name, 
             email, 
-            password, 
+            password: hashedPassword, 
             phone,
             imageURL 
         });
