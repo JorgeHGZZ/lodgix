@@ -1,9 +1,16 @@
-:root{
+:root {
   --primary-color: #221d1a;
   --secondary-color: #c6a97e;
   --bg-color: #f5f1ea;
   --card-color: #ffffff;
   --text-color: #2b2b2b;
+
+  --border-color: #e7dfd4;
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  --radius: 16px;
 
   --ocupada: #a44a3f;
   --disponible: #6b8f71;
@@ -11,7 +18,7 @@
   --limpieza: #7aa6a1;
 }
 
-.reservation-container{
+.reservation-container {
   width: 85%;
   margin: auto;
   padding: 40px;
@@ -19,35 +26,50 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.room-header{
+.room-header,
+.reservation-form,
+.calendar-panel {
   background: var(--card-color);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.room-header {
   padding: 20px;
   border-radius: 12px;
   border: 1px solid #ddd;
   margin-bottom: 25px;
 }
 
-.room-header h2{
+.room-header:hover,
+.reservation-form:hover,
+.calendar-panel:hover {
+  box-shadow: var(--shadow-md);
+  transition: 0.25s ease;
+}
+
+.room-header h2 {
   color: var(--primary-color);
   margin-bottom: 15px;
 }
 
-.room-grid{
+.room-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
 
-.room-grid p{
+.room-grid p {
   margin: 0;
 }
 
-.description{
+.description {
   margin-top: 10px;
   color: var(--text-color);
 }
 
-.status{
+.status {
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 12px;
@@ -56,46 +78,46 @@
   font-weight: 500;
 }
 
-.disponible{
+.disponible {
   background: var(--disponible);
 }
 
-.ocupada{
+.ocupada {
   background: var(--ocupada);
 }
 
-.mantenimiento{
+.mantenimiento {
   background: var(--mantenimiento);
 }
 
-.limpieza{
+.limpieza {
   background: var(--limpieza);
 }
 
-.reservation-form{
+.reservation-form {
   background: var(--card-color);
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
 }
 
-.form-row{
+.form-row {
   display: flex;
   gap: 20px;
   margin-bottom: 15px;
 }
 
-.form-group{
+.form-group {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.form-group.full{
+.form-group.full {
   width: 100%;
 }
 
-.form-group label{
+.form-group label {
   font-weight: 600;
   margin-bottom: 6px;
   color: var(--secondary-color);
@@ -103,58 +125,226 @@
 
 .form-group input,
 .form-group select,
-.form-group textarea{
-  padding: 10px;
-  border-radius: 8px;
+.form-group textarea {
+  padding: 12px 14px;
+  border-radius: 12px;
   border: 1px solid #ddd;
-  background: #fafafa;
+  background: #fff;
   font-size: 14px;
   color: var(--text-color);
+  transition: all .2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: var(--secondary-color);
 }
 
 .form-group input:focus,
 .form-group select:focus,
-.form-group textarea:focus{
+.form-group textarea:focus {
   outline: none;
-  border: 1px solid var(--primary-color);
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 4px rgba(198, 169, 126, 0.15);
 }
 
-textarea{
+textarea {
   resize: none;
   height: 80px;
 }
 
-.actions{
+.actions {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.btn{
-  padding: 10px 18px;
-  border-radius: 8px;
+.btn {
+  padding: 12px 22px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: 0.3s;
-  font-weight: 500;
+  transition: .25s ease;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-.btn.back{
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(.98);
+}
+
+.btn.back {
   background: var(--ocupada);
   color: white;
 }
 
-.btn.back:hover{
+.btn.back:hover {
   opacity: 0.9;
 }
 
 
-.btn.primary{
+.btn.primary {
   background: var(--secondary-color);
   color: white;
 }
 
-.btn.primary:hover{
+.btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tabs-header {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.tab-button {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary-color);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.tab-button.active,
+.tab-button:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+}
+
+.calendar-panel {
+  background: var(--card-color);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.legend-item.ocupada {
+  background: var(--ocupada);
+}
+
+.legend-item.mantenimiento {
+  background: var(--mantenimiento);
+}
+
+.legend-item.limpieza {
+  background: var(--limpieza);
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.calendar-grid::-webkit-scrollbar {
+  height: 10px;
+}
+
+.calendar-grid::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 999px;
+}
+
+.calendar-grid::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 999px;
+}
+
+.calendar-day {
+  min-width: 240px;
+  min-height: 180px;
+  border: 1px solid #ececec;
+  border-radius: 18px;
+  padding: 16px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: .25s ease;
+}
+
+.calendar-day:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.calendar-day-label {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.slot-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.slot-label {
+  min-width: 65px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.slot-bar {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  text-transform: capitalize;
+  letter-spacing: .3px;
+}
+
+.slot-bar.ocupada {
+  background: var(--ocupada);
+}
+
+.slot-bar.mantenimiento {
+  background: var(--mantenimiento);
+}
+
+.slot-bar.limpieza {
+  background: var(--limpieza);
+}
+
+.slot-bar.empty {
+  background: #f0f0f0;
+  color: #666;
+  font-weight: 500;
 }

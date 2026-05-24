@@ -20,6 +20,7 @@ interface Room {
 function Rooms() {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [selectedFloor, setSelectedFloor] = useState<string>("");
+    const navigate = useNavigate();
 
     const fetchRooms = async (floor?: number) => {
         try {
@@ -56,11 +57,12 @@ function Rooms() {
                 <div className={styles.RoomsContainer}>
                     {rooms.map((room) => (
                         <RoomCard
-                            key={room._id ?? room.id}
-                            id={room.id ?? Number(room.number)}
+                            key={room._id}
+                            id={room.number}
                             status={room.status ?? "Disponible"}
                             category={room.category}
                             guestName={room.guestName}
+                            onClick={() => navigate(`/dashboard/detailroom/${room._id}`, { state: { room } })}
                         />
                     ))}
                 </div>
