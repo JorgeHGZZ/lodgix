@@ -1,12 +1,12 @@
 
 .Select {
-    padding: 10px 35px 10px 10px;
+    padding: 10px 10px 10px 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
     background-color: white;
     font-size: 14px;
     width: 50%;
-    margin-left: 5%
+
 }
 
 .Select:focus {

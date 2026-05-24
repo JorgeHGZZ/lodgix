@@ -3,9 +3,9 @@ import Room from "../models/Room.js";
 export const createRoom = async (req, res) => {
     try {
         const body = req.body || {};
-        const { number, description, price, capacity, category } = body;
+        const { number, description, price, capacity, category, floor } = body;
 
-        if (!number || !description || !price || !capacity || !category) {
+        if (!number || !description || !price || !capacity || !category || !floor) {
             return res.status(400).json({
                 message: "Todos los campos son requeridos"
             });
@@ -23,6 +23,7 @@ export const createRoom = async (req, res) => {
             price,
             capacity,
             category,
+            floor,
             available: true
         });
 
@@ -60,6 +61,20 @@ export const getRoomById = async (req, res) => {
         res.json(room);
     } catch (error) {
         res.status(500).json({
+            message: "Error en el servidor",
+            error: error.message
+        });
+    }
+};
+
+export const getRoomByFloor = async (req, res) => {
+    try {
+        const {floor} = req.params;
+        const rooms = await Room.find({ floor });
+        return res.json(rooms);
+
+    } catch (error) {
+        return res.status(500).json({
             message: "Error en el servidor",
             error: error.message
         });

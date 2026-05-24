@@ -10,7 +10,7 @@ interface RoomCardProps {
 }
 
 
-function RoomCard({ id, status, category, guestName }: RoomCardProps) {
+function RoomCard({ id, status, category, guestName, floor }: RoomCardProps) {
     return (
         <div className={`${styles.RoomCard} ${styles[status]}`}>
             <div className={styles.CardHeader}>
