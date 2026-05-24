@@ -27,9 +27,10 @@ const roomSchema = new mongoose.Schema({
         required: true,
         enum: ["Individual", "Doble", "Suite", "Familiar"]
     },
-    available: {
-        type: Boolean,
-        default: true
+    status: {
+        type: String,
+        enum: ['Ocupada', 'Disponible', 'Mantenimiento', 'Limpieza'],
+        default: 'Disponible'
     },
     createdAt: {
         type: Date,

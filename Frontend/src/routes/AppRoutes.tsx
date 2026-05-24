@@ -24,6 +24,7 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/pLanding2" element={<Landing2 />} />
 
+                <Route path="/" element={<Landing />} />
                 <Route path="/landing" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<SignUp />} />
@@ -36,8 +37,9 @@ const AppRouter = () => {
                     <Route path="mantenimiento" element={<Maintenance />} />
                     <Route path="limpieza" element={<Cleaning />} />
                     <Route path="reportes" element={<Reports />} />
-                    <Route path="detailroom" element={<DetailRoom  />} />
-                    <Route path="payment" element={<Payment  />} />
+                    <Route path="detailroom" element={<DetailRoom />} />
+                    <Route path="detailroom/:id" element={<DetailRoom />} />
+                    <Route path="payment" element={<Payment />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -44,21 +44,15 @@ function Landing() {
                     <h3>Reportes</h3>
                     <p>Analiza ocupación e ingresos fácilmente.</p>
                 </div>
-
-                <div className="feature-card">
-                    <h3>Huéspedes</h3>
-                    <p>Historial completo y datos organizados.</p>
-                </div>
-
                 <div className="feature-card">
                     <h3>Huéspedes</h3>
                     <p>Historial completo y datos organizados.</p>
                 </div>
             </section>
-
+            
             <section className="cta">
                 <h2>Empieza a gestionar tu hotel hoy</h2>
-                    <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
+                <Button onClick={() => navigate('/login')} classname="btn" titulo="Empieza Ahora"></Button>
             </section>
 
             <footer>
