@@ -22,8 +22,7 @@ function Rooms() {
 
     const fetchRooms = async (floor?: number) => {
         try {
-            const path = floor ? `/rooms/${floor}` : "/rooms";
-            console.log("Fetching rooms from:", path);
+            const path = floor ? `/rooms/${floor}` : "/rooms/1";
             const response = await api.get(path);
             setRooms(response.data);
         } catch (error) {
@@ -36,7 +35,6 @@ function Rooms() {
         const loadRooms = async () => {
             await fetchRooms();
         };
-
         void loadRooms();
     }, []);
 

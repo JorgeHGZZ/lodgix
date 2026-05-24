@@ -55,7 +55,7 @@ export const register = async (req, res) => {
 export const ObtenerUsuarioPorEmail = async (req, res) => {
     try {
         const { email } = req.params;
-        const user = await User.findOne({ email }).select("name role email"); // Excluir la contraseña
+        const user = await User.findOne({ email }).select("name role email");
         if (!user) {
             return res.status(404).json({ message: "Usuario no encontrado" });
         }

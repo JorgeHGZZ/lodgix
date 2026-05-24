@@ -17,8 +17,12 @@ interface ClientProps {
 
 function Clients() {
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [modalMessage2, setModalMessage2] = useState("");
   const [clients, setClients] = useState<ClientProps[]>([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [clientToDelete, setClientToDelete] = useState<ClientProps | null>(null);
 
   useEffect(() => {
     api.get("/clients/")
@@ -55,16 +59,16 @@ function Clients() {
       .then((response) => {
         console.log("Cliente creado:", response.data);
         //Mostrar modal de éxito y limpiar formulario
-        setShowModal(true);
-        setModalMessage("Cliente creado exitosamente.");
+        setShowModal2(true);
+        setModalMessage2("Cliente creado exitosamente.");
         // Aquí podrías actualizar la lista de clientes o mostrar un mensaje de éxito
         loadClients();
       })
       .catch((error) => {
         console.error("Error al crear cliente:", error);
         // Mostrar modal de error y limpiar formulario
-        setShowModal(true);
-        setModalMessage(error.response?.data?.message || "Error al crear cliente.");
+        setShowModal2(true);
+        setModalMessage2(error.response?.data?.message || "Error al crear cliente.");
       });
   }
 
@@ -76,15 +80,14 @@ function Clients() {
   const handleDeleteClient = (clientId: string) => {
     api.delete(`/clients/${clientId}`)
       .then(() => {
-        console.log("Cliente eliminado:", clientId);
-        setShowModal(true);
-        setModalMessage("Cliente eliminado exitosamente.");
+        setShowModal2(true);
+        setModalMessage2("Cliente eliminado exitosamente.");
         loadClients();
       })
       .catch((error) => {
         console.error("Error al eliminar cliente:", error);
-        setShowModal(true);
-        setModalMessage(error.response?.data?.message || "Error al eliminar cliente.");
+        setShowModal2(true);
+        setModalMessage2(error.response?.data?.message || "Error al eliminar cliente.");
       });
     console.log("Eliminar cliente:", clientId);
   }
@@ -116,7 +119,10 @@ function Clients() {
                       <td>{client.address}</td>
                       <td>
                         <button onClick={() => handleEditClient(client)}><MdEdit /></button>
-                        <button onClick={() => handleDeleteClient(client._id)}><MdDelete /></button>
+                        <button onClick={() => {
+                          setShowDeleteModal(true);
+                          setClientToDelete(client);
+                        }}><MdDelete /></button>
                       </td>
                     </tr>
                   ))
@@ -149,11 +155,49 @@ function Clients() {
         </div>
       </div>
       <Modal
-        isOpen={showModal}
-        title="Información"
-        onClose={() => setShowModal(false)}
+        isOpen={showDeleteModal}
+        title="Confirmación"
+        showCloseButton={false}
+        onClose={() => {
+          setShowDeleteModal(false);
+          setClientToDelete(null);
+        }}
       >
-        <p>{modalMessage}</p>
+        <p>
+          ¿Estás seguro de eliminar a{" "}
+          <strong>{clientToDelete?.name}</strong>?
+        </p>
+
+        <div className="modalButtons">
+
+          <button
+            className="cancelButton"
+            onClick={() => {
+              setShowDeleteModal(false);
+              setClientToDelete(null);
+            }}
+          >
+            Cancelar
+          </button>
+          <button
+            className="deleteButton"
+            onClick={() => {
+              if (!clientToDelete?._id) return;
+              handleDeleteClient(clientToDelete._id);
+              setShowDeleteModal(false);
+              setClientToDelete(null);
+            }}
+          >
+            Eliminar
+          </button>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={showModal2}
+        title="Información"
+        onClose={() => setShowModal2(false)}
+      >
+        <p>{modalMessage2}</p>
       </Modal>
     </>
   );
