@@ -9,7 +9,6 @@ interface TopbarProps {
 }
 
 const Pisos = [
-    { value: '', label: 'Todos los pisos' },
     { value: '1', label: 'Piso 1' },
     { value: '2', label: 'Piso 2' },
     { value: '3', label: 'Piso 3' },

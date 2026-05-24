@@ -70,7 +70,7 @@ export const getRoomById = async (req, res) => {
 export const getRoomByFloor = async (req, res) => {
     try {
         const {floor} = req.params;
-        const rooms = await Room.find({ floor });
+        const rooms = await Room.find({ floor }).sort({ number: 1 });
         return res.json(rooms);
 
     } catch (error) {

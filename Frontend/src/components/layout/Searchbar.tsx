@@ -1,5 +1,6 @@
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+import '../../styles/searchbar.css';
 
 
 function Searchbar() {

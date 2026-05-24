@@ -1,6 +1,6 @@
 const JWT_SECRET = process.env.JWT_SECRET || "default";
 import User from "../models/User.js";
-import { generarToken } from "../utils/generarToken.js";
+import { generarToken } from "../utils/validarToken.js";
 
 export const register = async (req, res) => {
     try {

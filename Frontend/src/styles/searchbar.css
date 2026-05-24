@@ -23,7 +23,6 @@
 
 .searchbar:focus-within{
     box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-    transform: translateY(-1px);
     border: 1px solid var(--secondary-color);
 }
 
@@ -40,13 +39,10 @@
     background: var(--secondary-color);
     color:white;
     border:none;
-
     padding:10px 18px;
-    border-radius:12px;
-
+    border-radius:10px;
     cursor:pointer;
     font-weight:600;
-
     transition: all 0.25s;
 }
 
@@ -55,6 +51,7 @@
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(0,0,0,0.15);
 }
+
 .search-btn{
     height: 42px;
 }

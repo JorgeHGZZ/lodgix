@@ -1,6 +1,6 @@
 
 import User from "../models/User.js";
-import { generarToken } from "../utils/generarToken.js";
+import { generarToken } from "../utils/validarToken.js";
 const JWT_SECRET = process.env.JWT_SECRET || "default";
 
 

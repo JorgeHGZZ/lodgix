@@ -25,7 +25,7 @@ const roomSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ["individual", "doble", "suite", "familiar"]
+        enum: ["Individual", "Doble", "Suite", "Familiar"]
     },
     available: {
         type: Boolean,
