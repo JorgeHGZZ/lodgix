@@ -33,6 +33,8 @@ function DetailRoom() {
   const [clientSearch, setClientSearch] = useState("");
   const [clients, setClients] = useState<any[]>([]);
   const [selectedClient, setSelectedClient] = useState<any>(null);
+  const [roomReservations, setRoomReservations] = useState<any[]>([]);
+  const [calendarFilter, setCalendarFilter] = useState<"all" | "ocupada" | "mantenimiento" | "limpieza">("all");
 
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -56,6 +58,21 @@ function DetailRoom() {
         });
     }
   }, [id, room]);
+
+  useEffect(() => {
+  const loadReservations = async () => {
+    if (!room?._id) return;
+
+    try {
+      const response = await api.get(`/reservations/room/${room._id}`);
+      setRoomReservations(response.data);
+    } catch (error) {
+      console.error("Error al cargar reservas:", error);
+    }
+  };
+
+  void loadReservations();
+}, [room?._id]);
 
   const scheduleEvents: ScheduleEvent[] = useMemo(() => {
     const today = new Date();
@@ -188,7 +205,7 @@ useEffect(() => {
                 <strong>ESTADO:</strong>
                 <span className={`status ${room.status.toLowerCase()}`}>{room.status}</span>
               </p>
-              <p><strong>PRECIO:</strong> S/. {room.price.toFixed(2)}</p>
+              <p><strong>PRECIO:</strong> $. {room.price.toFixed(2)}</p>
             </div>
 
             <p className="description">
@@ -313,37 +330,76 @@ useEffect(() => {
         </>
       ) : (
         <div className="calendar-panel">
-          <div className="calendar-legend">
-            <span className="legend-item ocupada">Reservación</span>
-            <span className="legend-item mantenimiento">Mantenimiento</span>
-            <span className="legend-item limpieza">Limpieza</span>
-          </div>
+    <div className="calendar-legend">
+      <button
+        className={calendarFilter === "all" ? "legend-item all active" : "legend-item all"}
+        onClick={() => setCalendarFilter("all")}
+      >
+        Todos
+      </button>
 
-          <div className="calendar-grid">
-            {calendarDays.map((day) => {
-              const dayDate = new Date(day);
-              const morningStatus = getSlotStatus(dayDate, "mañana");
-              const afternoonStatus = getSlotStatus(dayDate, "tarde");
+      <button
+        className={calendarFilter === "ocupada" ? "legend-item ocupada active" : "legend-item ocupada"}
+        onClick={() => setCalendarFilter("ocupada")}
+      >
+        Reservación
+      </button>
 
-              return (
-                <div key={dayDate.toISOString()} className="calendar-day">
-                  <div className="calendar-day-label">{formatDayLabel(dayDate)}</div>
-                  <div className="slot-row">
-                    <span className="slot-label">Mañana</span>
-                    <div className={`slot-bar ${morningStatus}`}>{morningStatus === "empty" ? "Libre" : morningStatus}</div>
-                  </div>
-                  <div className="slot-row">
-                    <span className="slot-label">Tarde</span>
-                    <div className={`slot-bar ${afternoonStatus}`}>{afternoonStatus === "empty" ? "Libre" : afternoonStatus}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      <button
+        className={calendarFilter === "mantenimiento" ? "legend-item mantenimiento active" : "legend-item mantenimiento"}
+        onClick={() => setCalendarFilter("mantenimiento")}
+      >
+        Mantenimiento
+      </button>
+
+      <button
+        className={calendarFilter === "limpieza" ? "legend-item limpieza active" : "legend-item limpieza"}
+        onClick={() => setCalendarFilter("limpieza")}
+      >
+        Limpieza
+      </button>
     </div>
-  );
-}
 
+    <div className="calendar-grid">
+      {calendarDays.map((day) => {
+        const dayDate = new Date(day);
+        const morningStatus = getSlotStatus(dayDate, "mañana");
+        const afternoonStatus = getSlotStatus(dayDate, "tarde");
+
+        const showMorning =
+          calendarFilter === "all" || morningStatus === calendarFilter;
+
+        const showAfternoon =
+          calendarFilter === "all" || afternoonStatus === calendarFilter;
+
+        return (
+          <div key={dayDate.toISOString()} className="calendar-day">
+            <div className="calendar-day-label">{formatDayLabel(dayDate)}</div>
+
+            {showMorning && (
+              <div className="slot-row">
+                <span className="slot-label">Mañana</span>
+                <div className={`slot-bar ${morningStatus}`}>
+                  {morningStatus === "empty" ? "Libre" : morningStatus}
+                </div>
+              </div>
+            )}
+
+            {showAfternoon && (
+              <div className="slot-row">
+                <span className="slot-label">Tarde</span>
+                <div className={`slot-bar ${afternoonStatus}`}>
+                  {afternoonStatus === "empty" ? "Libre" : afternoonStatus}
+                  </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
 export default DetailRoom;

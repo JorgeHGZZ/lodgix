@@ -94,6 +94,10 @@
   background: var(--limpieza);
 }
 
+.all {
+  background: var(--text-color);
+}
+
 .reservation-form {
   background: var(--card-color);
   padding: 25px;
@@ -244,6 +248,7 @@ textarea {
   border-radius: 10px;
   color: white;
   font-size: 14px;
+    
 }
 
 .legend-item.ocupada {
@@ -258,6 +263,9 @@ textarea {
   background: var(--limpieza);
 }
 
+.legend-item.all {
+  background: var(--bg-color);
+}
 .calendar-grid {
   display: flex;
   flex-direction: row;
@@ -343,8 +351,23 @@ textarea {
   background: var(--limpieza);
 }
 
+.slot-bar.all {
+  background: var(--bg-color);
+}
+
+
 .slot-bar.empty {
   background: #f0f0f0;
   color: #666;
   font-weight: 500;
+}
+
+.calendar-legend button {
+  border: none;
+  cursor: pointer;
+}
+
+.legend-item.active {
+  outline: 2px solid var(--secondary-color);
+  transform: translateY(-2px);
 }

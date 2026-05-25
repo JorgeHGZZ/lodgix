@@ -173,3 +173,38 @@
   transform: translateY(-2px);
   background: #b89563;
 }
+
+.hotel-card .cancel {
+  background: #b94a48;
+}
+
+.hotel-card .cancel:hover {
+  background: #963735;
+}
+
+.edit-reservation-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-reservation-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.edit-reservation-form input {
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.hotel-card .edit {
+  background: #6c8ebf;
+}
+
+.hotel-card .edit:hover {
+  background: #5275a8;
+}
