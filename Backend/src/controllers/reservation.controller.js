@@ -213,15 +213,17 @@ export const updateReservation = async (req, res) => {
             });
         }
 
-        if (
-            reservation.status === "completed" ||
-            reservation.status === "cancelled"
-        ) {
+        if (reservation.status === "cancelled") {
             return res.status(400).json({
-                message: "No puedes modificar esta reservación"
+                message: "No puedes modificar una reservación cancelada"
             });
         }
 
+        if (reservation.status === "completed") {
+            return res.status(400).json({
+                message: "No puedes modificar una reservación con check-out realizado"
+            });
+        }
         const checkInDate = new Date(checkIn);
         const checkOutDate = new Date(checkOut);
 
