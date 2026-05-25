@@ -1,5 +1,6 @@
 import "../../styles/maintenance.css";
 import { useState, useEffect } from "react";
+import type { AxiosResponse } from "axios";
 import Modal from "../../components/layout/Modal";
 import Form from "../../components/layout/Form";
 import { TiCancel } from "react-icons/ti";
@@ -35,20 +36,20 @@ function Maintenance() {
 
   const loadReports = () => {
     api.get("/maintenance/")
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         setReports(response.data);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         console.error("Error al cargar reportes de mantenimiento:", error);
       });
   };
 
   const loadRooms = () => {
     api.get("/rooms")
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         setRooms(response.data);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         console.error("Error al cargar habitaciones:", error);
       });
   };
@@ -72,11 +73,11 @@ function Maintenance() {
 
     const report = { roomId, startDate, endDate, description, priority };
     api.post("/maintenance/", report)
-      .then(response => {
+      .then(() => {
         setModalMessage2("Reporte de mantenimiento creado exitosamente.");
         setIsModalOpen2(true);
         loadReports();
-      }).catch(error => {
+      }).catch((error: unknown) => {
         console.error("Error al crear reporte de mantenimiento:", error);
         setModalMessage2("Error al crear reporte de mantenimiento.");
         setIsModalOpen2(true);
@@ -86,11 +87,11 @@ function Maintenance() {
   const handleCancel = (id: string) => {
     console.log("Cancelando reporte con ID:", id);
     api.post(`/maintenance/${id}/cancel`)
-      .then((response) => {
+      .then(() => {
         setIsModalOpen2(true);
         setModalMessage2("Reporte de mantenimiento cancelado exitosamente.");
         loadReports();
-      }).catch(error => {
+      }).catch((error: unknown) => {
         console.error("Error al cancelar reporte de mantenimiento:", error);
         setModalMessage2("Error al cancelar reporte de mantenimiento.");
         setIsModalOpen2(true);
@@ -156,7 +157,7 @@ function Maintenance() {
               <th>Problema</th>
               <th>Prioridad</th>
               <th>Estado</th>
-              <th>Fecha</th>
+              <th>Fecha y hora</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -167,9 +168,9 @@ function Maintenance() {
                 <td>{report.description}</td>
                 <td className={`priority-${report.priority.toLowerCase()}`}>{report.priority}</td>
                 <td className={`status-${report.status.toLowerCase()}`}>{report.status}</td>
-                <td>{report.startDate}</td>
+                <td>{report.startDate} - {report.endDate}</td>
                 <td>
-                  <button className="cancelar-btn" onClick={() => {
+                  <button className="cancelar-btn" title="Cancelar reporte" aria-label="Cancelar reporte" onClick={() => {
                     setReportToDelete(report);
                     setShowDeleteModal(true);
                   }}><TiCancel />
@@ -183,7 +184,7 @@ function Maintenance() {
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <Form onSubmit={handleSubmit} title="Nuevo reporte" submitLabel="Enviar">
             <label>Habitación:</label>
-            <select name="roomId" required>
+            <select name="roomId" required aria-label="Seleccionar habitación">
               <option value="">Seleccione habitación</option>
               {rooms.map((room) => (
                 <option key={room._id} value={room._id}>
@@ -193,10 +194,10 @@ function Maintenance() {
             </select>
             <label>Problema:</label>
             <input type="text" placeholder="Descripción del problema" name="description" />
-            <label htmlFor="startDate">Fecha de inicio:</label>
-            <input type="date" id="startDate" name="startDate" />
-            <label htmlFor="endDate">Fecha de fin:</label>
-            <input type="date" id="endDate" name="endDate" />
+            <label htmlFor="startDate">Fecha y hora de inicio:</label>
+            <input type="datetime-local" id="startDate" name="startDate" required />
+            <label htmlFor="endDate">Fecha y hora de fin:</label>
+            <input type="datetime-local" id="endDate" name="endDate" required />
             <label>Prioridad:</label>
             <select title="Prioridad" name="priority">
               <option value="Alta">Alta</option>

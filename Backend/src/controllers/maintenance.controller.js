@@ -12,7 +12,11 @@ export const createMaintenance = async (req, res) => {
             return res.status(400).json({ message: "Fechas inválidas" });
         }
 
-        //Validar que la habitación exista
+        if (parsedEndDate <= parsedStartDate) {
+            return res.status(400).json({ message: "La fecha y hora de fin debe ser posterior a la de inicio" });
+        }
+
+        // Validar que la habitación exista
         const room = await Room.findById(roomId);
         if (!room) {
             return res.status(404).json({ message: "Habitación no encontrada" })
@@ -71,15 +75,19 @@ export const getMaintenances = async (req, res) => {
         const formattedMaintenances = maintenances.map(m => ({
             id: m._id,
             room: m.roomId?.number,
-            startDate: new Date(m.startDate).toLocaleDateString("es-MX", {
+            startDate: new Date(m.startDate).toLocaleString("es-MX", {
                 year: "numeric",
                 month: "2-digit",
-                day: "2-digit"
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit"
             }),
-            endDate: new Date(m.endDate).toLocaleDateString("es-MX", {
+            endDate: new Date(m.endDate).toLocaleString("es-MX", {
                 year: "numeric",
                 month: "2-digit",
-                day: "2-digit"
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit"
             }),
             priority: m.priority,
             description: m.description,
