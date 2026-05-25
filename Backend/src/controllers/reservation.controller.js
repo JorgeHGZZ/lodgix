@@ -1,18 +1,36 @@
 import Reservation from "../models/Reservation.js";
 import Client from "../models/Client.js";
 import Room from "../models/Room.js";
+import CleanService from "../models/CleanService.js";
+import Maintenance from "../models/Maintenance.js";
 import { parseDateRangeStrings, buildOverlapQuery } from "../utils/validarOverlaping.js";
 
 export const crearReserva = async (req, res) => {
     try {
-        const { clientId, roomId, checkIn, checkOut, guests } = req.body;
-        if (!clientId || !roomId || !checkIn || !checkOut || !guests) {
+        const {
+            clientId,
+            roomId,
+            client,
+            room,
+            checkIn,
+            checkOut,
+            guests,
+            discount,
+            advance,
+            actionType
+        } = req.body;
+
+        const finalClientId = clientId || client;
+        const finalRoomId = roomId || room;
+        const reservationStatus = actionType === "Hospedar" ? "confirmed" : "pending";
+
+        if (!finalClientId || !finalRoomId || !checkIn || !checkOut || guests == null || discount == null || advance == null) {
             return res.status(400).json({ message: "Todos los campos son requeridos" });
         }
 
         let checkInDate, checkOutDate;
         try {
-            ({ startDate: checkInDate, endDate: checkOutDate } = parseDateRangeStrings(checkIn, checkOut));
+            ({ startDate: checkInDate, endDate: checkOutDate } = parseDateRangeStrings(checkIn, checkOut, reservationStatus === "confirmed"));
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }
@@ -24,12 +42,12 @@ export const crearReserva = async (req, res) => {
             return res.status(400).json({ message: "No puedes reservar en fechas pasadas" });
         }
 
-        const existClient = await Client.findById(clientId);
+        const existClient = await Client.findById(finalClientId);
         if (!existClient) {
             return res.status(404).json({ message: "Cliente no encontrado" });
         }
 
-        const existRoom = await Room.findById(roomId);
+        const existRoom = await Room.findById(finalRoomId);
         if (!existRoom) {
             return res.status(404).json({ message: "Habitación no encontrada" });
         }
@@ -41,19 +59,19 @@ export const crearReserva = async (req, res) => {
         }
 
         const overlappingReservations = await Reservation.findOne({
-            roomId,
+            roomId: finalRoomId,
             status: { $in: ['pending', 'confirmed'] },
             ...buildOverlapQuery('checkIn', 'checkOut', checkInDate, checkOutDate)
         });
 
         const overlappingCleanService = await CleanService.findOne({
-            roomId,
-            ...buildOverlapQuery('startDate', 'endDate', parsedStartDate, parsedEndDate)
+            roomId: finalRoomId,
+            ...buildOverlapQuery('startDate', 'endDate', checkInDate, checkOutDate)
         });
 
         const overlappingMaintenance = await Maintenance.findOne({
-            roomId,
-            ...buildOverlapQuery('startDate', 'endDate', parsedStartDate, parsedEndDate)
+            roomId: finalRoomId,
+            ...buildOverlapQuery('startDate', 'endDate', checkInDate, checkOutDate)
         });
 
         if (overlappingCleanService) {
@@ -66,7 +84,8 @@ export const crearReserva = async (req, res) => {
             return res.status(400).json({ message: "Ya hay una reserva para esta habitación en estas fechas" });
         }
 
-        const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+        const rawDays = (checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24);
+        const days = Math.max(rawDays, 1);
         const subtotal = days * existRoom.price;
 
         const discountNumber = Number(discount) || 0;
@@ -75,8 +94,8 @@ export const crearReserva = async (req, res) => {
         const total = Math.max(subtotal - discountNumber - advanceNumber, 0);
 
         const reservation = await Reservation.create({
-            clientId,
-            roomId,
+            clientId: finalClientId,
+            roomId: finalRoomId,
             checkIn,
             checkOut,
             guests,
@@ -84,8 +103,13 @@ export const crearReserva = async (req, res) => {
             subtotal,
             discount: discountNumber,
             advance: advanceNumber,
-            total
+            total,
+            status: reservationStatus
         });
+
+        if (reservationStatus === "confirmed") {
+            await Room.findByIdAndUpdate(finalRoomId, { status: "Ocupada" });
+        }
 
         res.status(201).json({
             message: "Reserva creada correctamente",
@@ -186,13 +210,19 @@ export const BuscarResrvacionPOrCliente = async (req, res) => {
         const clientIds = clients.map(client => client._id);
 
         const reservations = await Reservation.find({
-            client: { $in: clientIds }
+            clientId: { $in: clientIds }
         })
-        .populate("client", "name email phone")
-        .populate("room", "number category price floor")
+        .populate("clientId", "name email phone")
+        .populate("roomId", "number category price floor")
         .sort({ createdAt: -1 });
 
-        res.json(reservations);
+        const mappedReservations = reservations.map((reservation) => ({
+            ...reservation.toObject(),
+            client: reservation.clientId,
+            room: reservation.roomId
+        }));
+
+        res.json(mappedReservations);
 
     } catch (error) {
         res.status(500).json({
@@ -285,10 +315,10 @@ export const getReservationsByRoom = async (req, res) => {
         const { roomId } = req.params;
 
         const reservations = await Reservation.find({
-            room: roomId,
+            roomId,
             status: { $in: ["pending", "confirmed"] }
         })
-        .populate("client", "name phone email")
+        .populate("clientId", "name phone email")
         .select("checkIn checkOut status");
 
         res.json(reservations);

@@ -41,6 +41,7 @@ function DetailRoom() {
 
   const [discount, setDiscount] = useState(0);
   const [advance, setAdvance] = useState(0);
+  const [actionType, setActionType] = useState<"Hospedar" | "Reservar">("Hospedar");
 
   useEffect(() => {
     if (!room && id) {
@@ -259,9 +260,15 @@ const todayInput = new Date().toISOString().split("T")[0];
 
               <div className="form-group">
                 <label htmlFor="actionType">Tipo de registro</label>
-                <select name="actionType" id="actionType" title="Selecciona el tipo de acción">
-                  <option>Hospedar</option>
-                  <option>Reservar</option>
+                <select
+                  name="actionType"
+                  id="actionType"
+                  title="Selecciona el tipo de acción"
+                  value={actionType}
+                  onChange={(e) => setActionType(e.target.value as "Hospedar" | "Reservar")}
+                >
+                  <option value="Hospedar">Hospedar</option>
+                  <option value="Reservar">Reservar</option>
                 </select>
               </div>
             </div>
@@ -324,6 +331,7 @@ const todayInput = new Date().toISOString().split("T")[0];
                       guests: 1,
                       discount,
                       advance,
+                      actionType,
                     },
                     clientData: selectedClient,
                     summary: {
@@ -340,7 +348,7 @@ const todayInput = new Date().toISOString().split("T")[0];
                 })
               }
                 classname="btn primary"
-                titulo="Reservar"
+                titulo={actionType === "Hospedar" ? "Hospedar" : "Reservar"}
               />
             </div>
 

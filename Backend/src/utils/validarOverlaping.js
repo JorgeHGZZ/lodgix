@@ -1,4 +1,4 @@
-export const parseDateRangeStrings = (start, end) => {
+export const parseDateRangeStrings = (start, end, allowSameDay = false) => {
     const startDate = new Date(start);
     const endDate = new Date(end);
 
@@ -6,7 +6,7 @@ export const parseDateRangeStrings = (start, end) => {
         throw new Error("Fechas inválidas");
     }
 
-    if (endDate <= startDate) {
+    if (endDate < startDate || (!allowSameDay && endDate.getTime() === startDate.getTime())) {
         throw new Error("La fecha de fin debe ser posterior a la fecha de inicio");
     }
 

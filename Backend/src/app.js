@@ -12,6 +12,7 @@ import cleanServiceRoutes from "./routes/cleanService.routes.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { startRoomStatusScheduler } from "./utils/roomStatusScheduler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +47,10 @@ app.use("/api/cleanservice", cleanServiceRoutes)
 
 // Conexión MongoDB
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB conectado"))
+    .then(() => {
+        console.log("MongoDB conectado");
+        startRoomStatusScheduler();
+    })
     .catch((err) => console.error(err));
 
 // Ruta test
