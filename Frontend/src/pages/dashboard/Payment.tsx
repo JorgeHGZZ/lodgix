@@ -153,8 +153,8 @@ function Payment() {
 
           <div className="summary-details">
 
-           <p><span>Hotel:</span> Sol y Mar</p>
-            <p><span>Ubicación:</span> Guatemala</p>
+           {/* <p><span>Hotel:</span> Sol y Mar</p>
+            <p><span>Ubicación:</span> Guatemala</p> */}
             <p><span>Habitación:</span> {summary?.category}</p>
             <p><span>Número:</span> {summary?.roomNumber}</p>
             <p><span>Noches:</span> {summary?.days}</p>
