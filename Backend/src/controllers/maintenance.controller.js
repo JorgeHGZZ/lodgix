@@ -1,45 +1,45 @@
-import Maintenance from "../models/Maintenance.js";
+
 import Room from "../models/Room.js";
+import Maintenance from "../models/Maintenance.js";
 import Reservation from "../models/Reservation.js";
+import CleanService from "../models/CleanService.js";
+import { parseDateRangeStrings, buildOverlapQuery } from "../utils/validarOverlaping.js";
 
 export const createMaintenance = async (req, res) => {
     try {
         const { roomId, startDate, endDate, priority, description } = req.body;
-        const parsedStartDate = new Date(startDate);
-        const parsedEndDate = new Date(endDate);
 
-        if (isNaN(parsedStartDate.getTime()) || isNaN(parsedEndDate.getTime())) {
-            return res.status(400).json({ message: "Fechas inválidas" });
+        if (!roomId || !startDate || !endDate) {
+            return res.status(400).json({ message: "roomId, startDate y endDate son requeridos" });
         }
 
-        if (parsedEndDate <= parsedStartDate) {
-            return res.status(400).json({ message: "La fecha y hora de fin debe ser posterior a la de inicio" });
+        let parsedStartDate, parsedEndDate;
+        try {
+            ({ startDate: parsedStartDate, endDate: parsedEndDate } = parseDateRangeStrings(startDate, endDate));
+        } catch (error) {
+            return res.status(400).json({ message: error.message });
         }
 
-        // Validar que la habitación exista
         const room = await Room.findById(roomId);
         if (!room) {
             return res.status(404).json({ message: "Habitación no encontrada" })
         }
-        //Validar que no haya mantenimientos programados para las mismas fechas
+
         const overlappingMaintenance = await Maintenance.findOne({
-            roomId,
-            $or: [
-                { startDate: { $lte: parsedEndDate, $gte: parsedStartDate } },
-                { endDate: { $lte: parsedEndDate, $gte: parsedStartDate } },
-                { startDate: { $lte: parsedStartDate }, endDate: { $gte: parsedEndDate } }
-            ],
+            room: roomId,
+            ...buildOverlapQuery('startDate', 'endDate', parsedStartDate, parsedEndDate),
             isCanceled: false
         });
 
-        //Validar que no haya reservas para la habitación en las mismas fechas
         const overlappingReservations = await Reservation.findOne({
             room: roomId,
-            $or: [
-                { checkIn: { $lte: parsedEndDate, $gte: parsedStartDate } },
-                { checkOut: { $lte: parsedEndDate, $gte: parsedStartDate } },
-                { checkIn: { $lte: parsedStartDate }, checkOut: { $gte: parsedEndDate } }
-            ],
+            ...buildOverlapQuery('checkIn', 'checkOut', parsedStartDate, parsedEndDate),
+            status: { $in: ['Programada', 'Confirmada'] }
+        });
+
+        const overlappingCleanService = await CleanService.findOne({
+            room: roomId,
+            ...buildOverlapQuery('startDate', 'endDate', parsedStartDate, parsedEndDate),
             status: { $in: ['Programada', 'Confirmada'] }
         });
 
@@ -49,9 +49,12 @@ export const createMaintenance = async (req, res) => {
         if (overlappingReservations) {
             return res.status(400).json({ message: "Ya hay una reserva para esta habitación en estas fechas" })
         }
+        if (overlappingCleanService) {
+            return res.status(400).json({ message: "Ya hay un servicio de limpieza programado para esta habitación en estas fechas" })
+        }
 
         const maintenance = new Maintenance({
-            roomId,
+            room: roomId,
             startDate: parsedStartDate,
             endDate: parsedEndDate,
             priority,
@@ -60,8 +63,6 @@ export const createMaintenance = async (req, res) => {
 
         await maintenance.save();
         res.status(201).json({ message: "Mantenimiento creado correctamente", maintenance })
-
-
     } catch (error) {
         res.status(500).json({ message: "Error al crear el mantenimiento", error: error.message })
     }
