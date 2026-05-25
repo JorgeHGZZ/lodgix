@@ -54,7 +54,7 @@ export const createMaintenance = async (req, res) => {
         }
 
         const maintenance = new Maintenance({
-            room: roomId,
+            roomId,
             startDate: parsedStartDate,
             endDate: parsedEndDate,
             priority,
