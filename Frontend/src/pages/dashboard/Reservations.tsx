@@ -133,14 +133,6 @@ const saveChanges = (id: string) => {
                       onChange={(e) => setEditForm({ ...editForm, checkOut: e.target.value })}
                     />
 
-                    <label>Huéspedes</label>
-                    <input
-                      type="number"
-                      value={editForm.guests}
-                      min="1"
-                      onChange={(e) => setEditForm({ ...editForm, guests: Number(e.target.value) })}
-                    />
-
                     <label>Descuento</label>
                     <input
                       type="number"

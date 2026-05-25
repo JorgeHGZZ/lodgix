@@ -57,7 +57,7 @@ function Landing() {
 
             <footer>
                 <p>&copy; 2026 Lodgix. Todos los derechos reservados.</p>
-                <p>&copy; 2026 Lodgix. Todos los derechos reservados.</p>
+             
             </footer>
         </>
     )

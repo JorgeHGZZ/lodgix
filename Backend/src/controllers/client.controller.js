@@ -105,7 +105,7 @@ export const buscarPorNombre = async (req, res) => {
         const { name } = req.query;
 
         if (!name) {
-            return res.json([]);
+            return res.status(404).json({ message: "Cliente no encontrado" });
         }
 
         const clients = await Client.find({

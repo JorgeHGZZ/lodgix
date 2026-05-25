@@ -130,8 +130,7 @@ body {
 
     background-color: var(--bg-color);
 
-    color: var(--primary-color);
-
+    color: var(--text-color);
     box-sizing: border-box;
 }
 

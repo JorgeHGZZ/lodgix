@@ -258,7 +258,7 @@ const todayInput = new Date().toISOString().split("T")[0];
               )}
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="actionType">Tipo de registro</label>
                 <select
                   name="actionType"
@@ -270,7 +270,7 @@ const todayInput = new Date().toISOString().split("T")[0];
                   <option value="Hospedar">Hospedar</option>
                   <option value="Reservar">Reservar</option>
                 </select>
-              </div>
+              </div> */}
             </div>
 
             <div className="form-row">

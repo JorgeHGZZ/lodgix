@@ -1,18 +1,16 @@
-
-
 .sidebar {
-    background-color: var(--primary-color);
-    color: var(--card-color);
-    height: 100vh;
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    box-sizing: border-box;
+  background-color: var(--primary-color);
+  color: var(--card-color);
+  height: 100vh;
+  width: 270px;
+  min-width: 270px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  box-sizing: border-box;
 }
 
 .line {
-    width: 100%;
-    fill: var(--bg-color);
+  width: 100%;
 }
