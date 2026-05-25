@@ -98,11 +98,18 @@ export const ActualizarUsuario= async (req, res)=>{
         // Obtener la URL de la imagen si se subió
         const imageURL = req.file ? `/uploads/${req.file.filename}` : undefined;
 
+        const updateData = {};
+
+        if (name) updateData.name = name;
+        if (email) updateData.email = email;
+        if (phone) updateData.phone = phone;
+        if (imageURL) updateData.imageURL = imageURL;
+
         // Construir objeto de actualización
-        const updateData = { name, email, phone };
-        if (imageURL) {
-            updateData.imageURL = imageURL;
-        }
+        // const updateData = { name, email, phone };
+        // if (imageURL) {
+        //     updateData.imageURL = imageURL;
+        // }
 
         const user = await User.findByIdAndUpdate(id, updateData, { new: true }).select("name role email phone imageURL");
         if (!user) {

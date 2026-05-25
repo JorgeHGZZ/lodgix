@@ -12,6 +12,7 @@ import Maintenance from "../pages/dashboard/Maintenance";
 import Cleaning from "../pages/dashboard/CleanService";
 import Reports from "../pages/dashboard/Reports";
 import Home from "../pages/dashboard/Home";
+import Perfil from "../pages/dashboard/perfil";
 
 //Rutas del lado del cliente
 import Landing2 from "../pages/public/PLanding2";
@@ -40,6 +41,7 @@ const AppRouter = () => {
                     <Route path="detailroom" element={<DetailRoom />} />
                     <Route path="detailroom/:id" element={<DetailRoom />} />
                     <Route path="payment" element={<Payment />} />
+                    <Route path="perfil" element={<Perfil />} />
                 </Route>
             </Routes>
         </BrowserRouter>

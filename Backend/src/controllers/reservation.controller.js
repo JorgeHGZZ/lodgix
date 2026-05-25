@@ -244,7 +244,7 @@ export const updateReservation = async (req, res) => {
             advance = 0
         } = req.body;
 
-        const reservation = await Reservation.findById(id).populate("room");
+       const reservation = await Reservation.findById(id).populate("roomId");
 
         if (!reservation) {
             return res.status(404).json({
@@ -276,7 +276,7 @@ export const updateReservation = async (req, res) => {
             (checkOutDate - checkInDate) /
             (1000 * 60 * 60 * 24);
 
-        const subtotal = days * reservation.room.price;
+       const subtotal = days * reservation.roomId.price;
 
         const discountNumber = Number(discount) || 0;
         const advanceNumber = Number(advance) || 0;
