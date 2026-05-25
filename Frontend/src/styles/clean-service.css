@@ -5,15 +5,14 @@
     margin-top: 0;
 }
 .cleaning-container{
+  width:90%;
   padding:30px;
   background:var(--bg-color);
-  min-height:100vh;
 }
 
 
 .cleaning-header{
   background: var(--card-color);
-  padding:18px;
   border-radius:14px;
   box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
@@ -107,7 +106,6 @@
   font-weight:600;
 }
 
-
 .cleaning-table td{
   padding:12px;
   border-bottom:1px solid #eee;
@@ -118,10 +116,6 @@
   transition:0.2s;
 }
 
-.cleaning-table tbody tr:hover{
-  background:#fafafa;
-  transform:scale(1.01);
-}
 
 .status-cleaning{
   background: rgba(122,166,161,0.2);

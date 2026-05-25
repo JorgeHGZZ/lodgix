@@ -1,39 +1,35 @@
 import Reservation from "../models/Reservation.js";
 import Client from "../models/Client.js";
 import Room from "../models/Room.js";
+import { parseDateRangeStrings, buildOverlapQuery } from "../utils/validarOverlaping.js";
 
 export const crearReserva = async (req, res) => {
     try {
-        const { client, room, checkIn, checkOut, guests, discount = 0, advance = 0 } = req.body;
-
-        if (!client || !room || !checkIn || !checkOut || !guests) {
+        const { clientId, roomId, checkIn, checkOut, guests } = req.body;
+        if (!clientId || !roomId || !checkIn || !checkOut || !guests) {
             return res.status(400).json({ message: "Todos los campos son requeridos" });
         }
 
-        const checkInDate = new Date(checkIn);
-        const checkOutDate = new Date(checkOut);
-
-        if (isNaN(checkInDate) || isNaN(checkOutDate)) {
-            return res.status(400).json({ message: "Fechas inválidas" });
-        }
-
-        if (checkInDate >= checkOutDate) {
-            return res.status(400).json({ message: "La fecha de salida debe ser mayor a la de entrada" });
+        let checkInDate, checkOutDate;
+        try {
+            ({ startDate: checkInDate, endDate: checkOutDate } = parseDateRangeStrings(checkIn, checkOut));
+        } catch (error) {
+            return res.status(400).json({ message: error.message });
         }
 
         const today = new Date();
-        today.setHours(0,0,0,0);
+        today.setHours(0, 0, 0, 0);
 
         if (checkInDate < today) {
             return res.status(400).json({ message: "No puedes reservar en fechas pasadas" });
         }
 
-        const existClient = await Client.findById(client);
+        const existClient = await Client.findById(clientId);
         if (!existClient) {
             return res.status(404).json({ message: "Cliente no encontrado" });
         }
 
-        const existRoom = await Room.findById(room);
+        const existRoom = await Room.findById(roomId);
         if (!existRoom) {
             return res.status(404).json({ message: "Habitación no encontrada" });
         }
@@ -44,17 +40,30 @@ export const crearReserva = async (req, res) => {
             });
         }
 
-        const conflictingReservation = await Reservation.findOne({
-            room,
+        const overlappingReservations = await Reservation.findOne({
+            roomId,
             status: { $in: ['pending', 'confirmed'] },
-            checkIn: { $lt: checkOutDate },
-            checkOut: { $gt: checkInDate }
+            ...buildOverlapQuery('checkIn', 'checkOut', checkInDate, checkOutDate)
         });
 
-        if (conflictingReservation) {
-            return res.status(400).json({
-                message: "La habitación ya está reservada en esas fechas"
-            });
+        const overlappingCleanService = await CleanService.findOne({
+            roomId,
+            ...buildOverlapQuery('startDate', 'endDate', parsedStartDate, parsedEndDate)
+        });
+
+        const overlappingMaintenance = await Maintenance.findOne({
+            roomId,
+            ...buildOverlapQuery('startDate', 'endDate', parsedStartDate, parsedEndDate)
+        });
+
+        if (overlappingCleanService) {
+            return res.status(400).json({ message: "Ya hay un servicio de limpieza programado para estas fechas" });
+        }
+        if (overlappingMaintenance) {
+            return res.status(400).json({ message: "Ya hay un mantenimiento programado para estas fechas" });
+        }
+        if (overlappingReservations) {
+            return res.status(400).json({ message: "Ya hay una reserva para esta habitación en estas fechas" });
         }
 
         const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
@@ -66,8 +75,8 @@ export const crearReserva = async (req, res) => {
         const total = Math.max(subtotal - discountNumber - advanceNumber, 0);
 
         const reservation = await Reservation.create({
-            client,
-            room,
+            clientId,
+            roomId,
             checkIn,
             checkOut,
             guests,
