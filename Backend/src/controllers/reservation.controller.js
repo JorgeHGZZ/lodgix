@@ -270,3 +270,24 @@ export const updateReservation = async (req, res) => {
         });
     }
 };
+
+export const getReservationsByRoom = async (req, res) => {
+    try {
+        const { roomId } = req.params;
+
+        const reservations = await Reservation.find({
+            room: roomId,
+            status: { $in: ["pending", "confirmed"] }
+        })
+        .populate("client", "name phone email")
+        .select("checkIn checkOut status");
+
+        res.json(reservations);
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al obtener reservas de habitación",
+            error: error.message
+        });
+    }
+};

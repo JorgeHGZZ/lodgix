@@ -4,12 +4,12 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { api } from "../../services/api";
 import Button from "../../components/ui/Button";
 
-interface ScheduleEvent {
-  label: string;
-  status: "ocupada" | "mantenimiento" | "limpieza";
-  start: string;
-  end: string;
-}
+// interface ScheduleEvent {
+//   label: string;
+//   status: "ocupada" | "mantenimiento" | "limpieza";
+//   start: string;
+//   end: string;
+// }
 
 const addDays = (date: Date, days: number) => {
   const result = new Date(date);
@@ -74,31 +74,31 @@ function DetailRoom() {
   void loadReservations();
 }, [room?._id]);
 
-  const scheduleEvents: ScheduleEvent[] = useMemo(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  // const scheduleEvents: ScheduleEvent[] = useMemo(() => {
+  //   const today = new Date();
+  //   today.setHours(0, 0, 0, 0);
 
-    return [
-      {
-        label: "Reservación",
-        status: "ocupada",
-        start: addDays(today, 1).toISOString(),
-        end: addDays(today, 3).toISOString(),
-      },
-      {
-        label: "Limpieza",
-        status: "limpieza",
-        start: addDays(today, 4).toISOString(),
-        end: addDays(today, 4).toISOString(),
-      },
-      {
-        label: "Mantenimiento",
-        status: "mantenimiento",
-        start: addDays(today, 6).toISOString(),
-        end: addDays(today, 6).toISOString(),
-      },
-    ];
-  }, []);
+  //   return [
+  //     {
+  //       label: "Reservación",
+  //       status: "ocupada",
+  //       start: addDays(today, 1).toISOString(),
+  //       end: addDays(today, 3).toISOString(),
+  //     },
+  //     {
+  //       label: "Limpieza",
+  //       status: "limpieza",
+  //       start: addDays(today, 4).toISOString(),
+  //       end: addDays(today, 4).toISOString(),
+  //     },
+  //     {
+  //       label: "Mantenimiento",
+  //       status: "mantenimiento",
+  //       start: addDays(today, 6).toISOString(),
+  //       end: addDays(today, 6).toISOString(),
+  //     },
+  //   ];
+  // }, []);
 
   const calendarDays = useMemo(() => {
     const today = new Date();
@@ -106,20 +106,37 @@ function DetailRoom() {
     return Array.from({ length: 14 }, (_, index) => addDays(startOfWeek, index));
   }, []);
 
+ //const getSlotStatus = (day: Date, slot: "mañana" | "tarde") => {
+   // const startOfDay = new Date(day);
+   // startOfDay.setHours(slot === "mañana" ? 0 : 12, 0, 0, 0);
+    //const endOfSlot = new Date(startOfDay);
+    //endOfSlot.setHours(slot === "mañana" ? 11 : 23, 59, 59, 999);
+
+    //const event = scheduleEvents.find((item) => {
+     // const eventStart = new Date(item.start);
+      //const eventEnd = new Date(item.end);
+      //return eventStart <= endOfSlot && eventEnd >= startOfDay;
+    //});
+
+    //return event ? event.status : "empty";
+  //};
+
   const getSlotStatus = (day: Date, slot: "mañana" | "tarde") => {
-    const startOfDay = new Date(day);
-    startOfDay.setHours(slot === "mañana" ? 0 : 12, 0, 0, 0);
-    const endOfSlot = new Date(startOfDay);
-    endOfSlot.setHours(slot === "mañana" ? 11 : 23, 59, 59, 999);
+  const startOfSlot = new Date(day);
+  startOfSlot.setHours(slot === "mañana" ? 0 : 12, 0, 0, 0);
 
-    const event = scheduleEvents.find((item) => {
-      const eventStart = new Date(item.start);
-      const eventEnd = new Date(item.end);
-      return eventStart <= endOfSlot && eventEnd >= startOfDay;
-    });
+  const endOfSlot = new Date(day);
+  endOfSlot.setHours(slot === "mañana" ? 11 : 23, 59, 59, 999);
 
-    return event ? event.status : "empty";
-  };
+  const reservation = roomReservations.find((item) => {
+    const checkInDate = new Date(item.checkIn);
+    const checkOutDate = new Date(item.checkOut);
+
+    return checkInDate <= endOfSlot && checkOutDate >= startOfSlot;
+  });
+
+  return reservation ? "ocupada" : "empty";
+};
   
   const hospedajeDays = useMemo(() => {
   if (!checkIn || !checkOut) return 0;
@@ -132,27 +149,6 @@ function DetailRoom() {
 
   return days > 0 ? days : 0;
 }, [checkIn, checkOut]);
-
-  if (loading) {
-    return <div className="reservation-container"><p>Cargando detalles de la habitación...</p></div>;
-  }
-
-  if (error || !room) {
-    return (
-      <div className="reservation-container">
-        <p>{error || "No se encontró la habitación."}</p>
-        <Button onClick={() => navigate('/dashboard')} classname="btn back" titulo="Volver" />
-      </div>
-    );
-  }
-
-  
-
-const subtotal = hospedajeDays * Number(room.price || 0);
-
-const total = Math.max(subtotal - discount - advance, 0);
-
-const todayInput = new Date().toISOString().split("T")[0];
 
 //busqueda del cliente
 useEffect(() => {
@@ -175,6 +171,28 @@ useEffect(() => {
 
   return () => clearTimeout(timer);
 }, [clientSearch]);
+
+  if (loading) {
+    return <div className="reservation-container"><p>Cargando detalles de la habitación...</p></div>;
+  }
+
+  if (error || !room) {
+    return (
+      <div className="reservation-container">
+        <p>{error || "No se encontró la habitación."}</p>
+        <Button onClick={() => navigate('/dashboard')} classname="btn back" titulo="Volver" />
+      </div>
+    );
+  }
+
+  
+
+const subtotal = hospedajeDays * Number(room.price || 0);
+
+const total = Math.max(subtotal - discount - advance, 0);
+
+const todayInput = new Date().toISOString().split("T")[0];
+
 
   return (
     <div className="reservation-container">
@@ -330,76 +348,76 @@ useEffect(() => {
         </>
       ) : (
         <div className="calendar-panel">
-    <div className="calendar-legend">
-      <button
-        className={calendarFilter === "all" ? "legend-item all active" : "legend-item all"}
-        onClick={() => setCalendarFilter("all")}
-      >
-        Todos
-      </button>
+      <div className="calendar-legend">
+        <button
+          className={calendarFilter === "all" ? "legend-item all active" : "legend-item all"}
+          onClick={() => setCalendarFilter("all")}
+        >
+          Todos
+        </button>
 
-      <button
-        className={calendarFilter === "ocupada" ? "legend-item ocupada active" : "legend-item ocupada"}
-        onClick={() => setCalendarFilter("ocupada")}
-      >
-        Reservación
-      </button>
+        <button
+          className={calendarFilter === "ocupada" ? "legend-item ocupada active" : "legend-item ocupada"}
+          onClick={() => setCalendarFilter("ocupada")}
+        >
+          Ocupado
+        </button>
 
-      <button
-        className={calendarFilter === "mantenimiento" ? "legend-item mantenimiento active" : "legend-item mantenimiento"}
-        onClick={() => setCalendarFilter("mantenimiento")}
-      >
-        Mantenimiento
-      </button>
+        <button
+          className={calendarFilter === "mantenimiento" ? "legend-item mantenimiento active" : "legend-item mantenimiento"}
+          onClick={() => setCalendarFilter("mantenimiento")}
+        >
+          Mantenimiento
+        </button>
 
-      <button
-        className={calendarFilter === "limpieza" ? "legend-item limpieza active" : "legend-item limpieza"}
-        onClick={() => setCalendarFilter("limpieza")}
-      >
-        Limpieza
-      </button>
-    </div>
-
-    <div className="calendar-grid">
-      {calendarDays.map((day) => {
-        const dayDate = new Date(day);
-        const morningStatus = getSlotStatus(dayDate, "mañana");
-        const afternoonStatus = getSlotStatus(dayDate, "tarde");
-
-        const showMorning =
-          calendarFilter === "all" || morningStatus === calendarFilter;
-
-        const showAfternoon =
-          calendarFilter === "all" || afternoonStatus === calendarFilter;
-
-        return (
-          <div key={dayDate.toISOString()} className="calendar-day">
-            <div className="calendar-day-label">{formatDayLabel(dayDate)}</div>
-
-            {showMorning && (
-              <div className="slot-row">
-                <span className="slot-label">Mañana</span>
-                <div className={`slot-bar ${morningStatus}`}>
-                  {morningStatus === "empty" ? "Libre" : morningStatus}
-                </div>
-              </div>
-            )}
-
-            {showAfternoon && (
-              <div className="slot-row">
-                <span className="slot-label">Tarde</span>
-                <div className={`slot-bar ${afternoonStatus}`}>
-                  {afternoonStatus === "empty" ? "Libre" : afternoonStatus}
-                  </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        <button
+          className={calendarFilter === "limpieza" ? "legend-item limpieza active" : "legend-item limpieza"}
+          onClick={() => setCalendarFilter("limpieza")}
+        >
+          Limpieza
+        </button>
       </div>
-    );
-  }
+
+      <div className="calendar-grid">
+        {calendarDays.map((day) => {
+          const dayDate = new Date(day);
+          const morningStatus = getSlotStatus(dayDate, "mañana");
+          const afternoonStatus = getSlotStatus(dayDate, "tarde");
+
+          const showMorning =
+            calendarFilter === "all" || morningStatus === calendarFilter;
+
+          const showAfternoon =
+            calendarFilter === "all" || afternoonStatus === calendarFilter;
+
+          return (
+            <div key={dayDate.toISOString()} className="calendar-day">
+              <div className="calendar-day-label">{formatDayLabel(dayDate)}</div>
+
+              {showMorning && (
+                <div className="slot-row">
+                  <span className="slot-label">Mañana</span>
+                  <div className={`slot-bar ${morningStatus}`}>
+                    {morningStatus === "empty" ? "Libre" : morningStatus}
+                  </div>
+                </div>
+              )}
+
+              {showAfternoon && (
+                <div className="slot-row">
+                  <span className="slot-label">Tarde</span>
+                  <div className={`slot-bar ${afternoonStatus}`}>
+                    {afternoonStatus === "empty" ? "Libre" : afternoonStatus}
+                    </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
 export default DetailRoom;
