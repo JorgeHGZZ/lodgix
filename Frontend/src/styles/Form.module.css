@@ -13,7 +13,7 @@
 
 .form {
     display: grid;
-    gap: 18px;
+    gap: 10px;
 }
 
 .actions {
@@ -40,7 +40,6 @@
 .form input,
 .form textarea,
 .form select {
-    width: 100%;
     padding: 12px 14px;
     border: 1px solid #d1d5db;
     border-radius: 10px;

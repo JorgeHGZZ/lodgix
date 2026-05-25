@@ -7,6 +7,7 @@ import UserRoutes from "./routes/user.routes.js";
 import roomRoutes from "./routes/room.routes.js";
 import clientRoutes from "./routes/client.routes.js";
 import reservationRoutes from "./routes/reservation.routes.js";
+import maintenanceRoutes from "./routes/maintenance.routes.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -39,6 +40,7 @@ app.use("/api/users", UserRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/clients", clientRoutes);
 app.use("/api/reservations", reservationRoutes);
+app.use("/api/maintenance", maintenanceRoutes);
 
 
 // Conexión MongoDB

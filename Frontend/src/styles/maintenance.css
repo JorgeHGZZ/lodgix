@@ -2,10 +2,10 @@
 .maintenance-container{
   padding:30px;
   background: var(--bg-color);
-  min-height:100vh;
 }
 
 .maintenance-header{
+  width:90%;
   background: var(--card-color);
   padding:18px;
   border-radius:14px;
@@ -55,10 +55,10 @@
 
 
 .maintenance-table{
-  width:100%;
+  width:90%;
   border-collapse:collapse;
   background:var(--card-color);
-  border-radius:14px;
+  border-radius:10px;
   overflow:hidden;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   margin-top:20px;
@@ -89,55 +89,63 @@
   transition: all 0.2s ease;
 }
 
-.maintenance-table tbody tr:hover{
-  background: #fafafa;
-  transform: scale(1.01);
-}
 
 
-.priority-high{
+
+.priority-alta{
   background: rgba(164, 74, 63, 0.15); 
   color: var(--ocupada);
   font-weight:600;
   padding:5px 10px;
-  border-radius:20px;
+
 }
 
-.priority-medium{
+.priority-media{
   background: rgba(212, 163, 115, 0.2);
   color: var(--mantenimiento);
   padding:5px 10px;
-  border-radius:20px;
 }
 
-.priority-low{
+.priority-baja{
   background: rgba(107, 143, 113, 0.2);
   color: var(--disponible);
   padding:5px 10px;
-  border-radius:20px;
 }
 
 /* 📊 ESTADOS */
-.status-progress{
+.status-en-progreso{
   background: rgba(122,166,161,0.2);
   color: var(--limpieza);
   padding:5px 10px;
-  border-radius:20px;
   font-weight:500;
 }
 
-.status-pending{
+.status-programada{
   background:#ececec;
   color:#555;
   padding:5px 10px;
-  border-radius:20px;
 }
 
-.status-done{
+.status-completado{
   background: rgba(107, 143, 113, 0.2);
   color: var(--disponible);
   padding:5px 10px;
-  border-radius:20px;
+}
+
+.status-cancelado{
+  background: rgba(164, 74, 63, 0.15); 
+  color: var(--ocupada);
+  font-weight:600;
+  padding:5px 10px;
+}
+
+.cancelar-btn{
+  background: transparent;
+  border:none;
+  color: var(--ocupada);
+  font-size:30px;
+  cursor:pointer;
+  transition: color 0.2s ease;
 }
 
 
