@@ -30,6 +30,16 @@ function DetailRoom() {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"details" | "calendar">("details");
 
+  const [clientSearch, setClientSearch] = useState("");
+  const [clients, setClients] = useState<any[]>([]);
+  const [selectedClient, setSelectedClient] = useState<any>(null);
+
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+
+  const [discount, setDiscount] = useState(0);
+  const [advance, setAdvance] = useState(0);
+
   useEffect(() => {
     if (!room && id) {
       setLoading(true);
@@ -93,6 +103,18 @@ function DetailRoom() {
 
     return event ? event.status : "empty";
   };
+  
+  const hospedajeDays = useMemo(() => {
+  if (!checkIn || !checkOut) return 0;
+
+  const start = new Date(checkIn);
+  const end = new Date(checkOut);
+
+  const diff = end.getTime() - start.getTime();
+  const days = diff / (1000 * 60 * 60 * 24);
+
+  return days > 0 ? days : 0;
+}, [checkIn, checkOut]);
 
   if (loading) {
     return <div className="reservation-container"><p>Cargando detalles de la habitación...</p></div>;
@@ -106,6 +128,36 @@ function DetailRoom() {
       </div>
     );
   }
+
+  
+
+const subtotal = hospedajeDays * Number(room.price || 0);
+
+const total = Math.max(subtotal - discount - advance, 0);
+
+const todayInput = new Date().toISOString().split("T")[0];
+
+//busqueda del cliente
+useEffect(() => {
+  const searchClient = async () => {
+    if (clientSearch.trim().length < 2) {
+      setClients([]);
+      return;
+    }
+
+    try {
+      const response = await api.get(`/clients/search?name=${clientSearch}`);
+      setClients(response.data);
+    } catch (error) {
+      console.error("Error al buscar cliente:", error);
+      setClients([]);
+    }
+  };
+
+  const timer = setTimeout(searchClient, 400);
+
+  return () => clearTimeout(timer);
+}, [clientSearch]);
 
   return (
     <div className="reservation-container">
@@ -149,7 +201,25 @@ function DetailRoom() {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="client">Cliente</label>
-                <input type="text" id="client" placeholder="Buscar cliente..." />
+                <input type="text" id="client" placeholder="Buscar cliente..." value={clientSearch} onChange={(e) => {setClientSearch(e.target.value);setSelectedClient(null);}}
+                  />
+                  {clients.length > 0 && (
+                <div className="client-results">
+                  {clients.map((client) => (
+                    <div
+                      key={client._id}
+                      className="client-option"
+                      onClick={() => {
+                        setSelectedClient(client);
+                        setClientSearch(client.name);
+                        setClients([]);
+                      }}
+                    >
+                    {client.name} - {client.phone}
+                    </div>
+                  ))}
+                </div>
+              )}
               </div>
 
               <div className="form-group">
@@ -164,29 +234,41 @@ function DetailRoom() {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="checkIn">Fecha de entrada</label>
-                <input type="date" id="checkIn" />
+               <input type="date" id="checkIn" value={checkIn}
+                  min={todayInput}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="checkOut">Fecha de salida</label>
-                <input type="date" id="checkOut" />
+                <input type="date" id="checkOut" value={checkOut}
+                 min={checkIn || todayInput}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                />
               </div>
             </div>
 
             <div className="form-row">
               <div className="form-group">
                 <label>Descuento</label>
-                <input type="number" defaultValue="0" />
+                <input type="number" value={discount}
+                  onChange={(e) => setDiscount(Number(e.target.value))}
+                  min="0"
+                />
               </div>
 
               <div className="form-group">
                 <label>Adelanto</label>
-                <input type="number" defaultValue="0" />
+                <input type="number" value={advance}
+                  onChange={(e) => setAdvance(Number(e.target.value))}
+                  min="0"
+                />
               </div>
 
               <div className="form-group full">
                 <label htmlFor="total">Total</label>
-                <input type="number" id="total" value={room.price} readOnly />
+                <input type="number" id="total" value={total} readOnly />
               </div>
             </div>
 
@@ -197,7 +279,34 @@ function DetailRoom() {
 
             <div className="actions">
               <Button onClick={() => navigate('/dashboard/rooms')} classname="btn back" titulo="Volver" />
-              <Button onClick={() => navigate('/dashboard/payment')} classname="btn primary" titulo="Reservar" />
+              <Button onClick={() => navigate("/dashboard/payment", {
+                  state: {
+                    reservationData: {
+                      client: selectedClient?._id,
+                      room: room._id,
+                      checkIn,
+                      checkOut,
+                      guests: 1,
+                      discount,
+                      advance,
+                    },
+                    clientData: selectedClient,
+                    summary: {
+                      roomNumber: room.number,
+                      category: room.category,
+                      price: room.price,
+                      days: hospedajeDays,
+                      subtotal,
+                      discount,
+                      advance,
+                      total,
+                    },
+                  },
+                })
+              }
+                classname="btn primary"
+                titulo="Reservar"
+              />
             </div>
 
           </div>

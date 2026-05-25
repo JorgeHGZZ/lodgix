@@ -4,7 +4,7 @@ import Room from "../models/Room.js";
 
 export const crearReserva = async (req, res) => {
     try {
-        const { client, room, checkIn, checkOut, guests } = req.body;
+        const { client, room, checkIn, checkOut, guests, discount = 0, advance = 0 } = req.body;
 
         if (!client || !room || !checkIn || !checkOut || !guests) {
             return res.status(400).json({ message: "Todos los campos son requeridos" });
@@ -58,7 +58,12 @@ export const crearReserva = async (req, res) => {
         }
 
         const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-        const total = days * existRoom.price;
+        const subtotal = days * existRoom.price;
+
+        const discountNumber = Number(discount) || 0;
+        const advanceNumber = Number(advance) || 0;
+
+        const total = Math.max(subtotal - discountNumber - advanceNumber, 0);
 
         const reservation = await Reservation.create({
             client,
@@ -66,6 +71,10 @@ export const crearReserva = async (req, res) => {
             checkIn,
             checkOut,
             guests,
+            days,
+            subtotal,
+            discount: discountNumber,
+            advance: advanceNumber,
             total
         });
 

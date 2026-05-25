@@ -23,6 +23,22 @@ const reservationSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    days: {
+        type: Number,
+        required: true
+    },
+    discount: {
+        type: Number,
+        default: 0
+    },
+    advance: {
+        type: Number,
+        default: 0
+    },
+    subtotal: {
+        type: Number,
+        required: true
+    },
     total: {
         type: Number,
         required: true

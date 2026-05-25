@@ -7,4 +7,5 @@ const router = express.Router();
 router.post("/", verifyToken, crearReserva);
 router.patch("/:id/status", verifyToken, updateReservationStatus);
 
+
 export default router;

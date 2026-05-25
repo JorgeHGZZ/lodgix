@@ -99,3 +99,24 @@ export const deleteClient = async(req,res) => {
         });
     }
 }
+
+export const buscarPorNombre = async (req, res) => {
+    try {
+        const { name } = req.query;
+
+        if (!name) {
+            return res.json([]);
+        }
+
+        const clients = await Client.find({
+            name: { $regex: name, $options: "i" }
+        }).select("name email phone address");
+
+        res.json(clients);
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al buscar clientes",
+            error: error.message
+        });
+    }
+};
